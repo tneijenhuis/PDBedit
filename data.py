@@ -1,0 +1,20 @@
+#This list is taken from interface a, must create an own list in future
+
+protein_aa = {'2AS', '3AH', '5HP', 'ACL', 'AGM', 'AIB', 'ALA', 'ALM', 'ALO',
+              'ALY', 'ARG', 'ARM', 'ASA', 'ASB', 'ASK', 'ASL', 'ASN', 'ASP',
+              'ASQ', 'AYA', 'BCS', 'BHD', 'BMT', 'BNN', 'BUC', 'BUG', 'C5C',
+              'C6C', 'CAS', 'CCS', 'CEA', 'CGU', 'CHG', 'CLE', 'CME', 'CSD',
+              'CSO', 'CSP', 'CSS', 'CSW', 'CSX', 'CXM', 'CY1', 'CY3', 'CYG',
+              'CYM', 'CYQ', 'CYS', 'DAH', 'DAL', 'DAR', 'DAS', 'DCY', 'DGL',
+              'DGN', 'DHA', 'DHI', 'DIL', 'DIV', 'DLE', 'DLY', 'DNP', 'DPN',
+              'DPR', 'DSN', 'DSP', 'DTH', 'DTR', 'DTY', 'DVA', 'EFC', 'FLA',
+              'FME', 'GGL', 'GL3', 'GLN', 'GLU', 'GLY', 'GLZ', 'GMA', 'GSC',
+              'HAC', 'HAR', 'HIC', 'HIP', 'HIS', 'HMR', 'HPQ', 'HTR', 'HYP',
+              'IAS', 'IIL', 'ILE', 'IYR', 'KCX', 'LEU', 'LLP', 'LLY', 'LTR',
+              'LYM', 'LYS', 'LYZ', 'MAA', 'MEN', 'MET', 'MHS', 'MIS', 'MLE',
+              'MPQ', 'MSA', 'MSE', 'MVA', 'NEM', 'NEP', 'NLE', 'NLN', 'NLP',
+              'NMC', 'OAS', 'OCS', 'OMT', 'PAQ', 'PCA', 'PEC', 'PHE', 'PHI',
+              'PHL', 'PR3', 'PRO', 'PRR', 'PTR', 'PYX', 'SAC', 'SAR', 'SCH',
+              'SCS', 'SCY', 'SEL', 'SEP', 'SER', 'SET', 'SHC', 'SHR', 'SMC',
+              'SOC', 'STY', 'SVA', 'THR', 'TIH', 'TPL', 'TPO', 'TPQ', 'TRG',
+              'TRO', 'TRP', 'TYB', 'TYI', 'TYQ', 'TYR', 'TYS', 'TYY', 'VAL'}

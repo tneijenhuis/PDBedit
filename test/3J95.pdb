@@ -35,7 +35,13 @@ REMARK   3
 REMARK   3 REFINEMENT.                                                          
 REMARK   3   SOFTWARE PACKAGES      : PHENIX, UCSF CHIMERA, RELION              
 REMARK   3   RECONSTRUCTION SCHEMA  : NULL                                      
-REMARK   3                                                                      
+REMARK   3                                                                                              atom_nmbr += 1
+                        
+                        col2 = str(atom_nmbr)
+                        for i in range((5 - len(col2))):
+                            col2 = " " + col2
+                        
+                        f.write("TER   {}     {}{}{}\n".format(col2, col4, col5, col6))
 REMARK   3 EM MAP-MODEL FITTING AND REFINEMENT                                  
 REMARK   3   PDB ENTRY                    : 1NSF                                
 REMARK   3   REFINEMENT SPACE             : RECIPROCAL                          
