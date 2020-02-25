@@ -1,6 +1,7 @@
 # this script will be used to parse the pdb, 
 # here PDB files will be read and documented
 import data
+import numpy as np
 
 class Current_open():
     structures = []
@@ -92,9 +93,9 @@ class Atom:
         self.resnmbr = resnmbr
 
     def set_pos(self, xcor, ycor, zcor):
-        self.xcor = xcor
-        self.ycor = ycor
-        self.zcor = zcor
+        self.xcor = float(xcor)
+        self.ycor = float(ycor)
+        self.zcor = float(zcor)
         
 
     def set_tempf(self, tempf):
@@ -108,6 +109,9 @@ class Atom:
 
     def set_struct(self, structure):
         self.Structure = structure
+
+    def set_Residue(self, residue):
+        self.Residue = residue
         
 
 def open_pdb(pdb, name):
@@ -138,6 +142,7 @@ def open_pdb(pdb, name):
             
             atom = Atom(atomname, element)
             atom.set_struct(build_structure)
+            atom.set_Residue(build_res)
             atom.set_ident(identifier)
             atom.set_residue(resname, resnmbr)
             atom.set_chain(chain)
@@ -145,6 +150,7 @@ def open_pdb(pdb, name):
             atom.set_tempf(tempf)
             atom.set_occupancy(occup)
             atom.set_segid(segid)
+
 
             #building residues from atoms
             if len(build_res.Atoms) == 0  or build_res.Atoms[0].resnmbr == atom.resnmbr and build_chain.Atoms[0].chain == atom.chain:
@@ -303,15 +309,15 @@ def write_pdb(structure, filename):
                 for i in range((4 - len(col6))):
                     col6 = " " + col6
                 
-                col7 = atom.xcor
+                col7 = str(atom.xcor)
                 for i in range((11 - len(col7))):
                     col7 = " " + col7
 
-                col8 = atom.ycor
+                col8 = str(atom.ycor)
                 for i in range(8 - len(col8)):
                     col8 = " " + col8
                 
-                col9 = atom.zcor
+                col9 = str(atom.zcor)
                 for i in range(8 - len(col9)):
                     col9 = " " + col9
                 
@@ -339,7 +345,6 @@ def make_atom_array(atoms):
     """ Takes a list of atom objects and returns a list of its positions
     """
 
-    import numpy as np
     for i, atom in enumerate(atoms):
         if i == 0:
             array = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
@@ -347,10 +352,118 @@ def make_atom_array(atoms):
             addarray = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
             array = np.concatenate((array, addarray))
 
-    return(array)
+    return array
 
-struct = open_local_pdb("test/3J95.pdb")
-
-make_atom_array(struct.Atoms)
+#def calc_surface(atomarray):
 
 
+
+
+struct = open_web_pdb("2PQT.pdb")
+
+alphas = []
+for atom in struct.Chains[0].Atoms:
+    if atom.name == "CA" or atom.name == "CB":
+        alphas.append(atom)
+
+array = make_atom_array(alphas)
+
+z_max = np.amax(array[:,1:], axis=0)[2]
+z_min = np.amin(array[:,1:], axis=0)[2]
+
+
+scanrange = 2.5
+surfs = np.empty([0])
+
+while z_min < z_max:
+    zpotent, zpos = np.where((array[:,1:] >= z_min) & (array[:,1:] <= (z_min + scanrange)))
+
+    zslice = np.empty([0, 4])
+    for level in range(len(zpos)):
+        if zpos[level] == 2:
+            addarray = np.array([array[zpotent[level]]])
+            zslice = np.concatenate((zslice, addarray))
+
+    
+    # print(zslice)
+    x_max = np.amax(zslice[:,1:], axis=0)[0]
+    x_min = np.amin(zslice[:,1:], axis=0)[0]
+
+    while x_min < x_max:
+        xpotent, xpos = np.where((zslice[:,1:] >= x_min) & (zslice[:,1:]<= (x_min + scanrange)))
+
+        xslice = np.empty([0, 4])
+        for line in range(len(xpos)):
+            if xpos[line] == 0:
+                addarray = np.array([zslice[xpotent[line]]])
+                xslice = np.concatenate((xslice, addarray))
+
+
+
+        if len(xslice) > 0:
+            
+            outermin = np.where(xslice[:,1:] == np.amin(xslice[:,1:], axis=0))[0][1]
+            outermax = np.where(xslice[:,1:] == np.amax(xslice[:,1:], axis=0))[0][1]
+
+
+        
+            if xslice[outermax][0].Residue not in surfs:
+                addarray = np.array([xslice[outermax][0].Residue])
+                surfs = np.concatenate((surfs, addarray))
+
+
+            if xslice[outermin][0].Residue not in surfs:
+                addarray = np.array([xslice[outermin][0].Residue])
+                surfs = np.concatenate((surfs, addarray))
+                
+
+
+
+        x_min += scanrange 
+
+    y_max = np.amax(zslice[:,1:], axis=0)[1]
+    y_min = np.amin(zslice[:,1:], axis=0)[1]
+
+    while y_min < y_max:
+        ypotent, ypos = np.where((zslice[:,1:] >= y_min) & (zslice[:,1:] <= (y_min + scanrange)))
+
+        yslice = np.empty([0, 4])
+        for line in range(len(ypos)):
+            if ypos[line] == 0:
+                addarray = np.array([zslice[ypotent[line]]])
+                yslice = np.concatenate((yslice, addarray))
+
+
+
+        if len(yslice) > 0:
+            outermin = np.where(yslice[:,1:] == np.amin(yslice[:,1:], axis=0))[0][0]
+            outermax = np.where(yslice[:,1:] == np.amax(yslice[:,1:], axis=0))[0][0]
+
+        
+            if yslice[outermax][0].Residue not in surfs:
+                addarray = np.array([yslice[outermax][0].Residue])
+                surfs = np.concatenate((surfs, addarray))
+
+
+            if yslice[outermin][0].Residue not in surfs:
+                addarray = np.array([yslice[outermin][0].Residue])
+                surfs = np.concatenate((surfs, addarray))
+                
+
+        y_min += scanrange 
+
+
+    z_min += scanrange
+
+
+
+
+new_struct = Structure("new")
+
+
+for res in surfs:
+    for atom in res.Atoms:
+        new_struct.add_atom(atom)
+    print(res.nmbr)
+
+write_pdb(new_struct, "new.pdb")
