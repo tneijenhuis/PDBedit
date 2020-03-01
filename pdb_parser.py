@@ -355,148 +355,121 @@ def make_atom_array(atoms):
     return array
 
 
-def calc_surface(array, scanrange = 4):
+def calc_surface(array, scanrange = 3):
     
     surfs = np.empty([0])
 
     surfs = make_slice(array, scanrange, surfs)
-    #surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
-    #surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
-
-
+    surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
+    surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
 
     return surfs
 
-def make_slice(array, scanrange, surfs, axis1 = 2, axis2 = 1, axis3 = 0):
+def make_slice(array, scanrange, surfs, axis1 = 0, axis2 = 2, axis3 = 1):
 
     #scanrange += np.random.uniform(3)
 
 
     axis_lengths = (np.amax(array[:,1:], axis = 0) - np.amin(array[:,1:], axis=0)) 
-    print(axis_lengths)
-
+    
     axis1_max = np.amax(array[:,1:], axis=0)[axis1]
-    axis1_min = np.amin(array[:,1:], axis=0)[axis1] 
+    axis1_min = np.amin(array[:,1:], axis=0)[axis1]
+    start_slice = axis1_min
 
-    while axis1_min < axis1_max:
-        axis1_potent, axis1_pos = np.where((array[:,1:] >= axis1_min) & (array[:,1:] <= (axis1_min + scanrange)))
+    current_slice = 0
 
+    while start_slice < axis1_max:
+        
         axis1_slice = np.empty([0, 4])
-        for level in range(len(axis1_pos)):
-            if axis1_pos[level] == axis1:
-                addarray = np.array([array[axis1_potent[level]]])
+        for atom in array:
+            if atom[axis1+1] >= start_slice and atom[axis1+1] <= (start_slice + scanrange):
+                addarray = np.array([atom])
                 axis1_slice = np.concatenate((axis1_slice, addarray))
 
+
+
+        current_slice += 1
+        print("slice: {}".format(current_slice))
+
+
         
-        # print(zslice)
-        axis2_max = np.amax(axis1_slice[:,1:], axis=0)[axis2]
-        axis2_min = np.amin(axis1_slice[:,1:], axis=0)[axis2] 
-       
+        if start_slice == axis1_min or start_slice + scanrange >= axis1_max:
+            for atom in range(len(axis1_slice)):
+                atom = axis1_slice[atom,0]
+                if atom.Residue not in surfs:
 
-        while axis2_min < axis2_max:
-            axis2_potent, axis2_pos = np.where((axis1_slice[:,1:] >= axis2_min) & (axis1_slice[:,1:] <= (axis2_min + scanrange)))
-
-            axis2_slice = np.empty([0, 4])
+                    addarray = np.array([atom.Residue])
+                    surfs = np.concatenate((surfs, addarray))
 
 
+        else:
 
-            for line in range(len(axis2_pos)):
-                if axis2_pos[line] == 0:
-                    addarray = np.array([axis1_slice[axis2_potent[line]]])
-                    axis2_slice = np.concatenate((axis2_slice, addarray))
-
-
-
-            if len(axis2_slice) > 0:
-                
-                outermin = np.where(axis2_slice[:,1:] == np.amin(axis2_slice[:,1:], axis=0))[0][axis3]
-                outermax = np.where(axis2_slice[:,1:] == np.amax(axis2_slice[:,1:], axis=0))[0][axis3]
-
-                curr_min = axis2_slice[outermin][axis3 + 1]
-                curr_max = axis2_slice[outermax][axis3 + 1]
-
-
-                voxel, pos = np.where((axis2_slice[:,1:] >= curr_min) & (axis2_slice[:,1:] <= (curr_min + scanrange)))
-
-                for i in range(len(voxel)):
-                    if pos[i] == axis3:
-                
-                        if axis2_slice[voxel[i]][0].Residue not in surfs:
-                            addarray = np.array([axis2_slice[voxel[i]][0].Residue])
-                            surfs = np.concatenate((surfs, addarray))
-
+            axis2_max = np.amax(axis1_slice[:,1:], axis=0)[axis2]
+            axis2_min = np.amin(axis1_slice[:,1:], axis=0)[axis2] 
+            start_line = axis2_min
             
 
+            while start_line < axis2_max:
 
-                voxel, pos = np.where((axis2_slice[:,1:] <= curr_max) & (axis2_slice[:,1:] >= (curr_max - scanrange)))        
-                for i in range(len(voxel)):
-                    if pos[i] == axis3:
-                
-                        if axis2_slice[voxel[i]][0].Residue not in surfs:
-                            addarray = np.array([axis2_slice[voxel[i]][0].Residue])
-                            surfs = np.concatenate((surfs, addarray))
+                axis2_slice = np.empty([0, 4])
+
+                for atom in axis1_slice:
+                    if atom[axis2+1] >= start_line and atom[axis2+1] <= start_line + scanrange:
+                        addarray = np.array([atom])
+                        axis2_slice = np.concatenate((axis2_slice, addarray))
+
+
+                if len(axis2_slice) > 0:               
                     
+                    curr_min = np.amin(axis2_slice[:,1:], axis=0)[axis3]
+                    curr_max= np.amax(axis2_slice[:,1:], axis=0)[axis3]
 
+                    if start_line == axis2_min or start_line + scanrange >= axis2_max:
+                        for atom in range(len(axis2_slice)):
+                            atom = axis2_slice[atom,0]
+                            if atom.Residue not in surfs:
 
-
-            axis2_min += scanrange 
-
-        # axis3_max = np.amax(axis1_slice[:,1:], axis=0)[axis3]
-        # axis3_min = np.amin(axis1_slice[:,1:], axis=0)[axis3] 
-       
-
-
-        # while axis3_min < axis3_max:
-        #     axis3_potent, axis3_pos = np.where((axis1_slice[:,1:] >= axis3_min) & (axis1_slice[:,1:] <= (axis3_min + scanrange)))
-
-        #     axis3_slice = np.empty([0, 4])
-        #     for line in range(len(axis3_pos)):
-        #         if axis3_pos[line] == axis1:
-        #             addarray = np.array([axis1_slice[axis3_potent[line]]])
-        #             yslice = np.concatenate((axis3_slice, addarray))
-
-
-
-        #     if len(axis3_slice) > 0:
-        #         outermin = np.where(axis3_slice[:,1:] == np.amin(axis3_slice[:,1:], axis=0))[0][axis2]
-        #         outermax = np.where(axis3_slice[:,1:] == np.amax(axis3_slice[:,1:], axis=0))[0][axis2]
-        #         curr_max = axis3_slice[outermax][axis2 + 1]
-        #         corr_min = axis3_slice[outermin][axis2 + 1]
-
-            
-        #         voxel, pos = np.where((axis3_slice[:,1:] >= curr_min) & (axis3_slice[:,1:] <= (curr_min + scanrange)))
-
-        #         for i in range(len(voxel)):
-        #             if pos[i] == axis2:
-                
-        #                 if axis3_slice[voxel[i]][0].Residue not in surfs:
-        #                     addarray = np.array([axis3_slice[voxel[i]][0].Residue])
-        #                     surfs = np.concatenate((surfs, addarray))
-
-            
-
-
-        #         voxel, pos = np.where((axis3_slice[:,1:] <= curr_max) & (axis3_slice[:,1:] >= (curr_max - scanrange)))        
-        #         for i in range(len(voxel)):
-        #             if pos[i] == axis2:
-                
-        #                 if axis3_slice[voxel[i]][0].Residue not in surfs:
-        #                     addarray = np.array([axis3_slice[voxel[i]][0].Residue])
-        #                     surfs = np.concatenate((surfs, addarray))
+                                addarray = np.array([atom.Residue])
+                                surfs = np.concatenate((surfs, addarray))           
                     
+                    else:
 
-        #     axis3_min += scanrange 
+                                                
+                        if last_min - curr_min > scanrange:
+                            min_range = last_min - curr_min
+                        
+                        else:
+                            min_range = scanrange
+   
+                        if curr_max - last_max > scanrange:
+                            max_range = last_min - curr_min
+                        else:
+                            max_range = scanrange
+
+                        for atom in axis2_slice:
+                            if (atom[axis3 + 1] >= curr_min and atom[axis3 + 1] <= (curr_min + scanrange)) or (atom[axis3 + 1] <= curr_max and atom[axis3+1] >= curr_max - scanrange):
+                                atom = atom[0]
+                                if atom.Residue not in surfs:
+
+                                    addarray = np.array([atom.Residue])
+                                    surfs = np.concatenate((surfs, addarray))
 
 
-        axis1_min += scanrange
+                    last_max = curr_max
+                    last_min = curr_min
+
+                start_line += scanrange 
+
+        start_slice += scanrange
 
     return surfs
 
 
-struct = open_local_pdb("test/3J95.pdb")
+struct = open_web_pdb("2PQT.pdb")
 
 alphas = []
 for atom in struct.Atoms:
+    #print(atom.ident)
 
     if atom.ident != "HETATM":
 
@@ -512,11 +485,9 @@ for res in surfs:
     for atom in res.Atoms:
         new_struct.add_atom(atom)
 
+print(len(arr))
+print(len(surfs))
 write_pdb(struct, "total.pdb")
 write_pdb(new_struct, "surf.pdb")
-
-print(len(struct.Residues))
-print(len(surfs))
-
 
 
