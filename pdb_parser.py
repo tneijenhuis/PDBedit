@@ -114,6 +114,15 @@ class Atom:
         self.Residue = residue
         
 
+class Voxel():
+
+    def __init__(self):
+        self.content = []
+
+    def add_content(self, content):
+        self.content.append(content)
+
+
 def open_pdb(pdb, name):
 
     build_res = Residue()
@@ -360,15 +369,12 @@ def calc_surface(array, scanrange = 3):
     surfs = np.empty([0])
 
     surfs = make_slice(array, scanrange, surfs)
-    surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
-    surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
+    #surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
+    #surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
 
     return surfs
 
 def make_slice(array, scanrange, surfs, axis1 = 0, axis2 = 2, axis3 = 1):
-
-    #scanrange += np.random.uniform(3)
-
 
     axis_lengths = (np.amax(array[:,1:], axis = 0) - np.amin(array[:,1:], axis=0)) 
     
@@ -464,6 +470,97 @@ def make_slice(array, scanrange, surfs, axis1 = 0, axis2 = 2, axis3 = 1):
 
     return surfs
 
+def make_3d_grid(array, voxel_size = 5):
+
+    axis1 = 0
+    axis2 = 1
+    axis3 = 2
+
+    maxs = np.amax(array[:,1:], axis = 0)
+
+    mins = np.amin(array[:,1:], axis=0)
+
+    centrs = (mins + maxs) / 2
+
+    print(mins, maxs, centrs) 
+
+    #initializing the search space
+
+    axis1_start = centrs[axis1]
+    axis2_start = centrs[axis2]
+    axis3_start = centrs[axis3]
+    axis1_count = 0
+    axis2_count = 0
+    axis3_count = 0 
+
+    while axis1_start > mins[axis1]:
+        axis1_start -= voxel_size
+
+    while axis2_start > mins[axis2]:
+        axis2_start -= voxel_size
+
+    while axis3_start > mins[axis3]:
+        axis3_start -= voxel_size
+
+    axis3_curr = axis3_start
+    while axis3_curr < maxs[axis3]:
+        axis3_count += 1
+        axis3_curr += voxel_size
+    axis2_curr = axis2_start
+    while axis2_curr < maxs[axis2]:
+        axis2_count += 1
+        axis2_curr += voxel_size
+    axis1_curr = axis1_start
+    while axis1_curr < maxs[axis1]:
+        axis1_count += 1
+        axis1_curr += voxel_size
+       
+    # generatin the 3d grid
+
+    axis3_curr = axis3_start
+
+    axis3_array = np.empty([0, axis2_count, axis1_count])
+
+    while axis3_curr < maxs[axis3]:
+
+        axis2_array = np.empty([0, axis1_count])
+        axis2_curr = axis2_start
+
+        while axis2_curr < maxs[axis2]:
+
+            axis1_array = np.empty([0])
+            axis1_curr = axis1_start
+
+            while axis1_curr < maxs[axis1]:
+
+                voxel = Voxel()
+
+                for atom in range(len(array)):
+                    atom = array[atom]
+                    if atom[axis1 +1] >= axis1_curr and atom[axis1+1] < axis1_curr + voxel_size and atom[axis2+1] >= axis2_curr and atom[axis2+1] < axis2_curr + voxel_size and atom[axis3+1] >= axis3_curr and atom[axis3 +1] < axis3_curr + voxel_size:
+                        voxel.add_content(atom[0])
+
+                #print(voxel_array.shape)
+                add_array = np.array([voxel])
+                axis1_array = np.concatenate((axis1_array, add_array))
+
+                axis1_curr += voxel_size
+
+            #print(axis1_array.shape)
+            add_array = np.array([axis1_array])
+            axis2_array = np.concatenate((axis2_array, add_array))
+
+
+            axis2_curr += voxel_size
+
+        add_array = np.array([axis2_array])
+        axis3_array = np.concatenate((axis3_array, add_array))
+
+
+        axis3_curr += voxel_size
+    return axis3_array
+
+
 
 struct = open_web_pdb("2PQT.pdb")
 
@@ -475,19 +572,30 @@ for atom in struct.Atoms:
 
         alphas.append(atom)
 
+
+
 arr = make_atom_array(alphas)
+grid = make_3d_grid(arr)
 
-surfs = calc_surface(arr)
+countertje = 0
+for slicie in grid:
+    for line in slicie:
+        for voxel in line:
+            for content in voxel.content:
+                countertje += 1
+print(len(arr),countertje)
 
-new_struct = Structure("Name")
+# surfs = calc_surface(arr)
 
-for res in surfs:
-    for atom in res.Atoms:
-        new_struct.add_atom(atom)
+# new_struct = Structure("Name")
 
-print(len(arr))
-print(len(surfs))
-write_pdb(struct, "total.pdb")
-write_pdb(new_struct, "surf.pdb")
+# for res in surfs:
+#     for atom in res.Atoms:
+#         new_struct.add_atom(atom)
+
+# print(len(arr))
+# print(len(surfs))
+# write_pdb(struct, "total.pdb")
+# write_pdb(new_struct, "surf.pdb")
 
 
