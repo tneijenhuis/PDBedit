@@ -523,10 +523,26 @@ def make_3d_grid(array, voxel_size = 5):
 
     while axis3_curr < maxs[axis3]:
 
+        allanal = 0
+
+        axis3_slice = np.empty([0, 4])
+        for atom in array:
+            if atom[axis3+1] >= axis3_curr and atom[axis3+1] < (axis3_curr + voxel_size):
+                addarray = np.array([atom])
+                axis3_slice = np.concatenate((axis3_slice, addarray))
+                allanal +=1
+
+
         axis2_array = np.empty([0, axis1_count])
         axis2_curr = axis2_start
 
         while axis2_curr < maxs[axis2]:
+
+            axis2_line = np.empty([0, 4])
+            for atom in axis3_slice:
+                if atom[axis2+1] >= axis2_curr and atom[axis2+1] < axis2_curr + voxel_size:
+                    addarray = np.array([atom])
+                    axis2_line = np.concatenate((axis2_line, addarray))            
 
             axis1_array = np.empty([0])
             axis1_curr = axis1_start
@@ -535,9 +551,8 @@ def make_3d_grid(array, voxel_size = 5):
 
                 voxel = Voxel()
 
-                for atom in range(len(array)):
-                    atom = array[atom]
-                    if atom[axis1 +1] >= axis1_curr and atom[axis1+1] < axis1_curr + voxel_size and atom[axis2+1] >= axis2_curr and atom[axis2+1] < axis2_curr + voxel_size and atom[axis3+1] >= axis3_curr and atom[axis3 +1] < axis3_curr + voxel_size:
+                for atom in axis2_line:
+                    if atom[axis1 +1] >= axis1_curr and atom[axis1+1] < axis1_curr + voxel_size:
                         voxel.add_content(atom[0])
 
                 #print(voxel_array.shape)
