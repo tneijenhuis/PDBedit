@@ -114,10 +114,11 @@ class Voxel():
 
     def __init__(self):
         self.content = []
+        self.empty = True
 
     def add_content(self, content):
         self.content.append(content)
-
+        self.empty = False
 
 def open_pdb(pdb, name):
     """
@@ -629,7 +630,7 @@ def surf_from_grid(gird):
             for current_voxel_numb in range(grid.shape[2]):
                 current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
 
-                if len(current_voxel.content) > 0 and current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 :
+                if current_voxel.empty == False and current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 :
 
                     for atom in current_voxel.content:   
                         if atom.Residue not in surfs:
@@ -646,8 +647,8 @@ def surf_from_grid(gird):
                     neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
                     neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1]   
 
-                    if (len(neighbour1.content) == 0 or len(neighbour2.content) == 0 or len(neighbour3.content) == 0 or len(neighbour4.content) == 0 or len(neighbour5.content) == 0 or len(neighbour6.
-                        content) == 0) and len(current_voxel.content) > 0: 
+                    if (neighbour1.empty or neighbour2.empty or neighbour3.empty or neighbour4.empty or neighbour5.empty or neighbour6.
+                    empty) and current_voxel.empty == False: 
                         for atom in current_voxel.content:   
                             if atom.Residue not in surfs:
 
