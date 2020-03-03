@@ -1,1 +1,2 @@
-# PDBedit
+# PSIC
+by Tim Neijenhuis
