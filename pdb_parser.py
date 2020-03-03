@@ -9,8 +9,6 @@ class Current_open():
     def add_struct(self, struct):
         self.structures.append(structatom)
 
-
-
 class Structure:
     
     def __init__(self, name):
@@ -19,8 +17,6 @@ class Structure:
         self.Residues = []
         self.Atoms = []
         self.chainnames = []
-
-        
 
     def add_chain(self, chain):
         self.Chains.append(chain)
@@ -124,6 +120,13 @@ class Voxel():
 
 
 def open_pdb(pdb, name):
+    """
+    Function takes a PDB formatted file and returns a Structure object which contains all atom information of the file
+    ---------------
+    arguments :
+    pdb = iteratable PDB file
+    name = name of the generated structure
+    """
 
     build_res = Residue()
     build_chain = Chain()
@@ -229,6 +232,13 @@ def open_pdb(pdb, name):
 
 
 def open_local_pdb(file):
+    """
+    This function opens a local PDB file and generates a Structure object
+    ---------
+    arguments:
+    file = path to be parsed PDB file
+    """
+
     name = file[-8:-4]
     
     with open(file) as f:
@@ -239,6 +249,13 @@ def open_local_pdb(file):
 
 
 def open_web_pdb(pdb):
+    """
+    Parses a PDB structure from the web and returns a Structure object
+    ------------------------
+    arguments:
+    pdb = name of the pdb structure
+    """
+
     import urllib3
     http = urllib3.PoolManager()
 
@@ -258,6 +275,14 @@ def open_web_pdb(pdb):
 
         
 def write_pdb(structure, filename):
+
+    """
+    takes a Structure object to generate a PDB formatted file using the Atoms information
+    -----------------------------------
+    arguments:
+    structure = Structure object
+    filename = PATH + name of the to be generated file
+    """
 
     if ".pdb" not in filename:
         print("can only make files witb pdb extention")
@@ -369,8 +394,8 @@ def calc_surface(array, scanrange = 3):
     surfs = np.empty([0])
 
     surfs = make_slice(array, scanrange, surfs)
-    #surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
-    #surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
+    surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
+    surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
 
     return surfs
 
@@ -472,6 +497,18 @@ def make_slice(array, scanrange, surfs, axis1 = 0, axis2 = 2, axis3 = 1):
 
 def make_3d_grid(array, voxel_size = 5):
 
+    """
+    Takes an array to generate a 3d array containing Voxel object [z[y[[x[Voxel]]]]
+    --------------------------------
+    arguments:
+    array = a 2d array containing [object, x, y, z]
+
+    optional:
+    voxel_size (default 5) = the cubic size of each voxel
+    """
+
+    print("Separating atoms into voxels of size {}".format(voxel_size))
+    
     axis1 = 0
     axis2 = 1
     axis3 = 2
@@ -482,10 +519,6 @@ def make_3d_grid(array, voxel_size = 5):
 
     centrs = (mins + maxs) / 2
 
-    print(mins, maxs, centrs) 
-
-    #initializing the search space
-
     axis1_start = centrs[axis1]
     axis2_start = centrs[axis2]
     axis3_start = centrs[axis3]
@@ -493,6 +526,7 @@ def make_3d_grid(array, voxel_size = 5):
     axis2_count = 0
     axis3_count = 0 
 
+    # initializing search space
     while axis1_start > mins[axis1]:
         axis1_start -= voxel_size
 
@@ -502,6 +536,7 @@ def make_3d_grid(array, voxel_size = 5):
     while axis3_start > mins[axis3]:
         axis3_start -= voxel_size
 
+    # array dimention calculation
     axis3_curr = axis3_start
     while axis3_curr < maxs[axis3]:
         axis3_count += 1
@@ -576,8 +611,59 @@ def make_3d_grid(array, voxel_size = 5):
     return axis3_array
 
 
+def surf_from_grid(gird):
+    """
+    Calculates surface residues
+    """
 
-struct = open_web_pdb("2PQT.pdb")
+    surfs = np.empty([0])
+
+    # this fuction will check the content of a specific voxel and compairs it with its neighbours.
+    # if a neibour is empty the voxel is positioned at the surface
+
+    print("Calculating surface")    
+
+    for current_slice_numb in range(grid.shape[0]):
+        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
+        for current_line_numb in range(grid.shape[1]):
+            for current_voxel_numb in range(grid.shape[2]):
+                current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
+
+                if len(current_voxel.content) > 0 and current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 :
+
+                    for atom in current_voxel.content:   
+                        if atom.Residue not in surfs:
+
+                            addarray = np.array([atom.Residue])
+                            surfs = np.concatenate((surfs, addarray)) 
+
+                
+                else:
+                    neighbour1 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb]
+                    neighbour2 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb]
+                    neighbour3 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb]
+                    neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
+                    neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
+                    neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1]   
+
+                    if (len(neighbour1.content) == 0 or len(neighbour2.content) == 0 or len(neighbour3.content) == 0 or len(neighbour4.content) == 0 or len(neighbour5.content) == 0 or len(neighbour6.
+                        content) == 0) and len(current_voxel.content) > 0: 
+                        for atom in current_voxel.content:   
+                            if atom.Residue not in surfs:
+
+                                addarray = np.array([atom.Residue])
+                                surfs = np.concatenate((surfs, addarray)) 
+
+    return surfs
+
+
+
+
+
+
+
+
+struct = open_local_pdb("test/3J95.pdb")
 
 alphas = []
 for atom in struct.Atoms:
@@ -591,26 +677,19 @@ for atom in struct.Atoms:
 
 arr = make_atom_array(alphas)
 grid = make_3d_grid(arr)
+surfs = surf_from_grid(grid)
 
-countertje = 0
-for slicie in grid:
-    for line in slicie:
-        for voxel in line:
-            for content in voxel.content:
-                countertje += 1
-print(len(arr),countertje)
 
 # surfs = calc_surface(arr)
 
-# new_struct = Structure("Name")
+new_struct = Structure("Name")
 
-# for res in surfs:
-#     for atom in res.Atoms:
-#         new_struct.add_atom(atom)
+for res in surfs:
+    for atom in res.Atoms:
+        new_struct.add_atom(atom)
 
-# print(len(arr))
-# print(len(surfs))
-# write_pdb(struct, "total.pdb")
-# write_pdb(new_struct, "surf.pdb")
+print(len(surfs))
+write_pdb(struct, "total.pdb")
+write_pdb(new_struct, "surf.pdb")
 
 
