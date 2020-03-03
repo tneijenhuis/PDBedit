@@ -112,9 +112,12 @@ class Atom:
 
 class Voxel():
 
-    def __init__(self):
+    def __init__(self, xcor, ycor, zcor):
         self.content = []
         self.empty = True
+        self.xcor = xcor
+        self.ycor = ycor
+        self.zcor = zcor
 
     def add_content(self, content):
         self.content.append(content)
@@ -390,112 +393,6 @@ def make_atom_array(atoms):
     return array
 
 
-def calc_surface(array, scanrange = 3):
-    
-    surfs = np.empty([0])
-
-    surfs = make_slice(array, scanrange, surfs)
-    surfs = make_slice(array, scanrange,surfs, 0, 2, 1)
-    surfs = make_slice(array, scanrange, surfs, 1, 2, 0)
-
-    return surfs
-
-def make_slice(array, scanrange, surfs, axis1 = 0, axis2 = 2, axis3 = 1):
-
-    axis_lengths = (np.amax(array[:,1:], axis = 0) - np.amin(array[:,1:], axis=0)) 
-    
-    axis1_max = np.amax(array[:,1:], axis=0)[axis1]
-    axis1_min = np.amin(array[:,1:], axis=0)[axis1]
-    start_slice = axis1_min
-
-    current_slice = 0
-
-    while start_slice < axis1_max:
-        
-        axis1_slice = np.empty([0, 4])
-        for atom in array:
-            if atom[axis1+1] >= start_slice and atom[axis1+1] <= (start_slice + scanrange):
-                addarray = np.array([atom])
-                axis1_slice = np.concatenate((axis1_slice, addarray))
-
-
-
-        current_slice += 1
-        print("slice: {}".format(current_slice))
-
-
-        
-        if start_slice == axis1_min or start_slice + scanrange >= axis1_max:
-            for atom in range(len(axis1_slice)):
-                atom = axis1_slice[atom,0]
-                if atom.Residue not in surfs:
-
-                    addarray = np.array([atom.Residue])
-                    surfs = np.concatenate((surfs, addarray))
-
-
-        else:
-
-            axis2_max = np.amax(axis1_slice[:,1:], axis=0)[axis2]
-            axis2_min = np.amin(axis1_slice[:,1:], axis=0)[axis2] 
-            start_line = axis2_min
-            
-
-            while start_line < axis2_max:
-
-                axis2_slice = np.empty([0, 4])
-
-                for atom in axis1_slice:
-                    if atom[axis2+1] >= start_line and atom[axis2+1] <= start_line + scanrange:
-                        addarray = np.array([atom])
-                        axis2_slice = np.concatenate((axis2_slice, addarray))
-
-
-                if len(axis2_slice) > 0:               
-                    
-                    curr_min = np.amin(axis2_slice[:,1:], axis=0)[axis3]
-                    curr_max= np.amax(axis2_slice[:,1:], axis=0)[axis3]
-
-                    if start_line == axis2_min or start_line + scanrange >= axis2_max:
-                        for atom in range(len(axis2_slice)):
-                            atom = axis2_slice[atom,0]
-                            if atom.Residue not in surfs:
-
-                                addarray = np.array([atom.Residue])
-                                surfs = np.concatenate((surfs, addarray))           
-                    
-                    else:
-
-                                                
-                        if last_min - curr_min > scanrange:
-                            min_range = last_min - curr_min
-                        
-                        else:
-                            min_range = scanrange
-   
-                        if curr_max - last_max > scanrange:
-                            max_range = last_min - curr_min
-                        else:
-                            max_range = scanrange
-
-                        for atom in axis2_slice:
-                            if (atom[axis3 + 1] >= curr_min and atom[axis3 + 1] <= (curr_min + scanrange)) or (atom[axis3 + 1] <= curr_max and atom[axis3+1] >= curr_max - scanrange):
-                                atom = atom[0]
-                                if atom.Residue not in surfs:
-
-                                    addarray = np.array([atom.Residue])
-                                    surfs = np.concatenate((surfs, addarray))
-
-
-                    last_max = curr_max
-                    last_min = curr_min
-
-                start_line += scanrange 
-
-        start_slice += scanrange
-
-    return surfs
-
 def make_3d_grid(array, voxel_size = 5):
 
     """
@@ -585,7 +482,11 @@ def make_3d_grid(array, voxel_size = 5):
 
             while axis1_curr < maxs[axis1]:
 
-                voxel = Voxel()
+                x = (axis1_curr * 2 + voxel_size) / 2
+                y = (axis2_curr * 2 + voxel_size) / 2
+                z = (axis3_curr * 2 + voxel_size) / 2
+
+                voxel = Voxel(x, y, z)
 
                 for atom in axis2_line:
                     if atom[axis1 +1] >= axis1_curr and atom[axis1+1] < axis1_curr + voxel_size:
@@ -630,13 +531,14 @@ def surf_from_grid(gird):
             for current_voxel_numb in range(grid.shape[2]):
                 current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
 
-                if current_voxel.empty == False and current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 :
+                if (current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or 
+                    current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 ):
+                    if current_voxel.empty == False:
+                        for atom in current_voxel.content:   
+                            if atom.Residue not in surfs:
 
-                    for atom in current_voxel.content:   
-                        if atom.Residue not in surfs:
-
-                            addarray = np.array([atom.Residue])
-                            surfs = np.concatenate((surfs, addarray)) 
+                                addarray = np.array([atom.Residue])
+                                surfs = np.concatenate((surfs, addarray)) 
 
                 
                 else:
@@ -658,13 +560,71 @@ def surf_from_grid(gird):
     return surfs
 
 
+def find_pockets(gird):
+    """
+    finds pockets in a protein structure
+    """
+
+    empty_voxels = np.empty([0])
+    print("Searching for pockets")
 
 
+    for current_slice_numb in range(grid.shape[0]):
+
+        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
+        for current_line_numb in range(grid.shape[1]):
+            for current_voxel_numb in range(grid.shape[2]):
+                current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
+
+                if (current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or 
+                    current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 ):
+                    pass
+                else:
+
+                    neighbour1 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb]
+                    neighbour2 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb]
+                    neighbour3 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb]
+                    neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
+                    neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
+                    neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1] 
 
 
+                    if current_voxel.empty and (neighbour1.empty == False or neighbour2.empty == False or
+                        neighbour3.empty == False or neighbour4.empty == False or neighbour5.empty == False or 
+                        neighbour6.empty == False):
+
+                        addarray = np.array([current_voxel])
+                        empty_voxels = np.concatenate((empty_voxels, addarray))
+ 
+    return empty_voxels
 
 
-struct = open_local_pdb("test/3J95.pdb")
+def write_dummy(dum_list, filename):
+    
+    with open(filename, 'w') as f:
+        atom_nmbr = 0
+        for atom in dum_list:
+            
+            atom_nmbr += 1
+            
+            col2 = str(atom_nmbr)
+            for i in range((5 - len(col2))):
+                col2 = " " + col2
+            col7 = str(atom.xcor)
+            for i in range((11 - len(col7))):
+                col7 = " " + col7
+
+            col8 = str(atom.ycor)
+            for i in range(8 - len(col8)):
+                col8 = " " + col8
+            
+            col9 = str(atom.zcor)
+            for i in range(8 - len(col9)):
+                col9 = " " + col9
+            f.write("ATOM  {} DUM  DUM       {}{}{}\n".format(col2, col7, col8, col9))
+
+
+struct = open_local_pdb("total.pdb")
 
 alphas = []
 for atom in struct.Atoms:
@@ -677,20 +637,25 @@ for atom in struct.Atoms:
 
 
 arr = make_atom_array(alphas)
-grid = make_3d_grid(arr)
-surfs = surf_from_grid(grid)
+grid = make_3d_grid(arr, 1)
 
+pockets = find_pockets(grid)
 
-# surfs = calc_surface(arr)
+print(grid.shape[0] * grid.shape[1] * grid.shape[2])
+print(len(pockets))
 
-new_struct = Structure("Name")
+write_dummy(pockets, "dummy.pdb")
 
-for res in surfs:
-    for atom in res.Atoms:
-        new_struct.add_atom(atom)
+# surfs = surf_from_grid(grid)
 
-print(len(surfs))
-write_pdb(struct, "total.pdb")
-write_pdb(new_struct, "surf.pdb")
+# new_struct = Structure("Name")
+
+# for res in surfs:
+#     for atom in res.Atoms:
+#         new_struct.add_atom(atom)
+
+# print(len(surfs))
+# write_pdb(struct, "total.pdb")
+# write_pdb(new_struct, "surf.pdb")
 
 
