@@ -1,0 +1,624 @@
+ATOM      1  DUM DUM     0      4.2805-20.3635  -0.309                       X
+ATOM      2  DUM DUM     0      8.2805-20.3635  -0.309                       X
+ATOM      3  DUM DUM     0      4.2805-18.3635  -0.309                       X
+ATOM      4  DUM DUM     0      6.2805-18.3635  -0.309                       X
+ATOM      5  DUM DUM     0      8.2805-18.3635  -0.309                       X
+ATOM      6  DUM DUM     0      2.2805-16.3635  -0.309                       X
+ATOM      7  DUM DUM     0      4.2805-16.3635  -0.309                       X
+ATOM      8  DUM DUM     0      8.2805-16.3635  -0.309                       X
+ATOM      9  DUM DUM     0     -9.7195-14.3635  -0.309                       X
+ATOM     10  DUM DUM     0     -7.7195-14.3635  -0.309                       X
+ATOM     11  DUM DUM     0     -5.7195-14.3635  -0.309                       X
+ATOM     12  DUM DUM     0     -3.7195-14.3635  -0.309                       X
+ATOM     13  DUM DUM     0     -1.7195-14.3635  -0.309                       X
+ATOM     14  DUM DUM     0      2.2805-14.3635  -0.309                       X
+ATOM     15  DUM DUM     0      4.2805-14.3635  -0.309                       X
+ATOM     16  DUM DUM     0      6.2805-14.3635  -0.309                       X
+ATOM     17  DUM DUM     0      8.2805-14.3635  -0.309                       X
+ATOM     18  DUM DUM     0     -9.7195-12.3635  -0.309                       X
+ATOM     19  DUM DUM     0     -5.7195-12.3635  -0.309                       X
+ATOM     20  DUM DUM     0     -3.7195-12.3635  -0.309                       X
+ATOM     21  DUM DUM     0      8.2805-12.3635  -0.309                       X
+ATOM     22  DUM DUM     0     -9.7195-10.3635  -0.309                       X
+ATOM     23  DUM DUM     0     -7.7195-10.3635  -0.309                       X
+ATOM     24  DUM DUM     0     -5.7195-10.3635  -0.309                       X
+ATOM     25  DUM DUM     0      8.2805-10.3635  -0.309                       X
+ATOM     26  DUM DUM     0     -9.7195 -8.3635  -0.309                       X
+ATOM     27  DUM DUM     0     -7.7195 -8.3635  -0.309                       X
+ATOM     28  DUM DUM     0     -5.7195 -8.3635  -0.309                       X
+ATOM     29  DUM DUM     0      8.2805 -8.3635  -0.309                       X
+ATOM     30  DUM DUM     0     -9.7195 -6.3635  -0.309                       X
+ATOM     31  DUM DUM     0     -7.7195 -6.3635  -0.309                       X
+ATOM     32  DUM DUM     0     -5.7195 -6.3635  -0.309                       X
+ATOM     33  DUM DUM     0     -9.7195 -4.3635  -0.309                       X
+ATOM     34  DUM DUM     0     -7.7195 -4.3635  -0.309                       X
+ATOM     35  DUM DUM     0     -3.7195 -4.3635  -0.309                       X
+ATOM     36  DUM DUM     0     -9.7195 -2.3635  -0.309                       X
+ATOM     37  DUM DUM     0     -7.7195 -2.3635  -0.309                       X
+ATOM     38  DUM DUM     0     -5.7195 -2.3635  -0.309                       X
+ATOM     39  DUM DUM     0      4.2805 -0.3635  -0.309                       X
+ATOM     40  DUM DUM     0     10.2805  3.6365  -0.309                       X
+ATOM     41  DUM DUM     0      8.2805-18.3635   1.691                       X
+ATOM     42  DUM DUM     0     -9.7195-14.3635   1.691                       X
+ATOM     43  DUM DUM     0     -5.7195-14.3635   1.691                       X
+ATOM     44  DUM DUM     0      4.2805-14.3635   1.691                       X
+ATOM     45  DUM DUM     0      8.2805-14.3635   1.691                       X
+ATOM     46  DUM DUM     0     -5.7195-10.3635   1.691                       X
+ATOM     47  DUM DUM     0     -7.7195 -8.3635   1.691                       X
+ATOM     48  DUM DUM     0     -7.7195 -6.3635   1.691                       X
+ATOM     49  DUM DUM     0     -9.7195 -2.3635   1.691                       X
+ATOM     50  DUM DUM     0     -7.7195 -2.3635   1.691                       X
+ATOM     51  DUM DUM     0     10.2805  3.6365   1.691                       X
+ATOM     52  DUM DUM     0    -11.7195-16.3635   3.691                       X
+ATOM     53  DUM DUM     0    -11.7195-14.3635   3.691                       X
+ATOM     54  DUM DUM     0      8.2805-14.3635   3.691                       X
+ATOM     55  DUM DUM     0     -9.7195 -2.3635   3.691                       X
+ATOM     56  DUM DUM     0     -9.7195 -0.3635   3.691                       X
+ATOM     57  DUM DUM     0     -7.7195 -0.3635   3.691                       X
+ATOM     58  DUM DUM     0     10.2805  3.6365   3.691                       X
+ATOM     59  DUM DUM     0     12.2805  3.6365   3.691                       X
+ATOM     60  DUM DUM     0     10.2805  5.6365   3.691                       X
+ATOM     61  DUM DUM     0    -13.7195-26.3635   5.691                       X
+ATOM     62  DUM DUM     0    -11.7195-26.3635   5.691                       X
+ATOM     63  DUM DUM     0     -9.7195-26.3635   5.691                       X
+ATOM     64  DUM DUM     0     -5.7195-26.3635   5.691                       X
+ATOM     65  DUM DUM     0     -3.7195-26.3635   5.691                       X
+ATOM     66  DUM DUM     0      2.2805-26.3635   5.691                       X
+ATOM     67  DUM DUM     0      8.2805-20.3635   5.691                       X
+ATOM     68  DUM DUM     0      8.2805-18.3635   5.691                       X
+ATOM     69  DUM DUM     0      8.2805-16.3635   5.691                       X
+ATOM     70  DUM DUM     0    -15.7195-14.3635   5.691                       X
+ATOM     71  DUM DUM     0      8.2805-14.3635   5.691                       X
+ATOM     72  DUM DUM     0    -15.7195-12.3635   5.691                       X
+ATOM     73  DUM DUM     0      8.2805-12.3635   5.691                       X
+ATOM     74  DUM DUM     0     -5.7195-10.3635   5.691                       X
+ATOM     75  DUM DUM     0     14.2805 -8.3635   5.691                       X
+ATOM     76  DUM DUM     0     -9.7195 -2.3635   5.691                       X
+ATOM     77  DUM DUM     0      4.2805 -2.3635   5.691                       X
+ATOM     78  DUM DUM     0    -15.7195 -0.3635   5.691                       X
+ATOM     79  DUM DUM     0     -7.7195 -0.3635   5.691                       X
+ATOM     80  DUM DUM     0     14.2805 -0.3635   5.691                       X
+ATOM     81  DUM DUM     0     -9.7195  1.6365   5.691                       X
+ATOM     82  DUM DUM     0     12.2805  1.6365   5.691                       X
+ATOM     83  DUM DUM     0    -15.7195  3.6365   5.691                       X
+ATOM     84  DUM DUM     0    -11.7195  3.6365   5.691                       X
+ATOM     85  DUM DUM     0     -9.7195  3.6365   5.691                       X
+ATOM     86  DUM DUM     0     -7.7195  3.6365   5.691                       X
+ATOM     87  DUM DUM     0     10.2805  3.6365   5.691                       X
+ATOM     88  DUM DUM     0     12.2805  3.6365   5.691                       X
+ATOM     89  DUM DUM     0     10.2805  5.6365   5.691                       X
+ATOM     90  DUM DUM     0      8.2805  7.6365   5.691                       X
+ATOM     91  DUM DUM     0      8.2805  9.6365   5.691                       X
+ATOM     92  DUM DUM     0      4.2805 11.6365   5.691                       X
+ATOM     93  DUM DUM     0      2.2805 13.6365   5.691                       X
+ATOM     94  DUM DUM     0     -9.7195-26.3635   7.691                       X
+ATOM     95  DUM DUM     0     -7.7195-26.3635   7.691                       X
+ATOM     96  DUM DUM     0     -3.7195-26.3635   7.691                       X
+ATOM     97  DUM DUM     0     -1.7195-26.3635   7.691                       X
+ATOM     98  DUM DUM     0      8.2805-20.3635   7.691                       X
+ATOM     99  DUM DUM     0      8.2805-18.3635   7.691                       X
+ATOM    100  DUM DUM     0      8.2805-16.3635   7.691                       X
+ATOM    101  DUM DUM     0      0.2805-14.3635   7.691                       X
+ATOM    102  DUM DUM     0      8.2805-14.3635   7.691                       X
+ATOM    103  DUM DUM     0    -11.7195 -8.3635   7.691                       X
+ATOM    104  DUM DUM     0     14.2805 -8.3635   7.691                       X
+ATOM    105  DUM DUM     0     14.2805 -6.3635   7.691                       X
+ATOM    106  DUM DUM     0      6.2805 -2.3635   7.691                       X
+ATOM    107  DUM DUM     0     -9.7195 -0.3635   7.691                       X
+ATOM    108  DUM DUM     0     12.2805 -0.3635   7.691                       X
+ATOM    109  DUM DUM     0    -15.7195  3.6365   7.691                       X
+ATOM    110  DUM DUM     0     -9.7195  3.6365   7.691                       X
+ATOM    111  DUM DUM     0     10.2805  3.6365   7.691                       X
+ATOM    112  DUM DUM     0      2.2805 11.6365   7.691                       X
+ATOM    113  DUM DUM     0      2.2805 13.6365   7.691                       X
+ATOM    114  DUM DUM     0      4.2805 13.6365   7.691                       X
+ATOM    115  DUM DUM     0      2.2805 15.6365   7.691                       X
+ATOM    116  DUM DUM     0     -7.7195-26.3635   9.691                       X
+ATOM    117  DUM DUM     0     -5.7195-26.3635   9.691                       X
+ATOM    118  DUM DUM     0     -1.7195-26.3635   9.691                       X
+ATOM    119  DUM DUM     0     -7.7195-24.3635   9.691                       X
+ATOM    120  DUM DUM     0     -1.7195-22.3635   9.691                       X
+ATOM    121  DUM DUM     0      8.2805-16.3635   9.691                       X
+ATOM    122  DUM DUM     0     10.2805-16.3635   9.691                       X
+ATOM    123  DUM DUM     0     -3.7195-12.3635   9.691                       X
+ATOM    124  DUM DUM     0    -13.7195-10.3635   9.691                       X
+ATOM    125  DUM DUM     0     14.2805-10.3635   9.691                       X
+ATOM    126  DUM DUM     0     14.2805 -8.3635   9.691                       X
+ATOM    127  DUM DUM     0      4.2805 -2.3635   9.691                       X
+ATOM    128  DUM DUM     0      6.2805 -2.3635   9.691                       X
+ATOM    129  DUM DUM     0      6.2805  1.6365   9.691                       X
+ATOM    130  DUM DUM     0     -9.7195  3.6365   9.691                       X
+ATOM    131  DUM DUM     0     -5.7195  5.6365   9.691                       X
+ATOM    132  DUM DUM     0      0.2805 15.6365   9.691                       X
+ATOM    133  DUM DUM     0      2.2805 15.6365   9.691                       X
+ATOM    134  DUM DUM     0     -9.7195-26.3635  11.691                       X
+ATOM    135  DUM DUM     0     -7.7195-26.3635  11.691                       X
+ATOM    136  DUM DUM     0     -5.7195-26.3635  11.691                       X
+ATOM    137  DUM DUM     0     -3.7195-26.3635  11.691                       X
+ATOM    138  DUM DUM     0      6.2805-26.3635  11.691                       X
+ATOM    139  DUM DUM     0      8.2805-26.3635  11.691                       X
+ATOM    140  DUM DUM     0     -9.7195-24.3635  11.691                       X
+ATOM    141  DUM DUM     0     -7.7195-24.3635  11.691                       X
+ATOM    142  DUM DUM     0     -5.7195-24.3635  11.691                       X
+ATOM    143  DUM DUM     0     -9.7195-22.3635  11.691                       X
+ATOM    144  DUM DUM     0    -15.7195-20.3635  11.691                       X
+ATOM    145  DUM DUM     0     -9.7195-18.3635  11.691                       X
+ATOM    146  DUM DUM     0     -3.7195-14.3635  11.691                       X
+ATOM    147  DUM DUM     0     -1.7195-14.3635  11.691                       X
+ATOM    148  DUM DUM     0     -1.7195-12.3635  11.691                       X
+ATOM    149  DUM DUM     0     14.2805-12.3635  11.691                       X
+ATOM    150  DUM DUM     0     12.2805-10.3635  11.691                       X
+ATOM    151  DUM DUM     0     14.2805-10.3635  11.691                       X
+ATOM    152  DUM DUM     0     14.2805 -8.3635  11.691                       X
+ATOM    153  DUM DUM     0      8.2805 -6.3635  11.691                       X
+ATOM    154  DUM DUM     0    -13.7195 -4.3635  11.691                       X
+ATOM    155  DUM DUM     0     -9.7195 -4.3635  11.691                       X
+ATOM    156  DUM DUM     0     -3.7195 -4.3635  11.691                       X
+ATOM    157  DUM DUM     0     -9.7195 -0.3635  11.691                       X
+ATOM    158  DUM DUM     0     -3.7195 11.6365  11.691                       X
+ATOM    159  DUM DUM     0     -1.7195 11.6365  11.691                       X
+ATOM    160  DUM DUM     0     -3.7195 13.6365  11.691                       X
+ATOM    161  DUM DUM     0     -9.7195 15.6365  11.691                       X
+ATOM    162  DUM DUM     0     -5.7195 15.6365  11.691                       X
+ATOM    163  DUM DUM     0     -3.7195 15.6365  11.691                       X
+ATOM    164  DUM DUM     0     -1.7195 15.6365  11.691                       X
+ATOM    165  DUM DUM     0     -9.7195-26.3635  13.691                       X
+ATOM    166  DUM DUM     0     -7.7195-26.3635  13.691                       X
+ATOM    167  DUM DUM     0     -5.7195-26.3635  13.691                       X
+ATOM    168  DUM DUM     0      4.2805-26.3635  13.691                       X
+ATOM    169  DUM DUM     0     -9.7195-24.3635  13.691                       X
+ATOM    170  DUM DUM     0     -7.7195-24.3635  13.691                       X
+ATOM    171  DUM DUM     0     -5.7195-24.3635  13.691                       X
+ATOM    172  DUM DUM     0      4.2805-24.3635  13.691                       X
+ATOM    173  DUM DUM     0     -7.7195-22.3635  13.691                       X
+ATOM    174  DUM DUM     0    -15.7195-20.3635  13.691                       X
+ATOM    175  DUM DUM     0    -15.7195-18.3635  13.691                       X
+ATOM    176  DUM DUM     0    -13.7195-18.3635  13.691                       X
+ATOM    177  DUM DUM     0    -15.7195-16.3635  13.691                       X
+ATOM    178  DUM DUM     0     14.2805-14.3635  13.691                       X
+ATOM    179  DUM DUM     0     12.2805-12.3635  13.691                       X
+ATOM    180  DUM DUM     0     14.2805-12.3635  13.691                       X
+ATOM    181  DUM DUM     0     14.2805-10.3635  13.691                       X
+ATOM    182  DUM DUM     0      0.2805 -2.3635  13.691                       X
+ATOM    183  DUM DUM     0      4.2805 -2.3635  13.691                       X
+ATOM    184  DUM DUM     0      6.2805 -2.3635  13.691                       X
+ATOM    185  DUM DUM     0     -3.7195 11.6365  13.691                       X
+ATOM    186  DUM DUM     0     -1.7195 11.6365  13.691                       X
+ATOM    187  DUM DUM     0     -1.7195 13.6365  13.691                       X
+ATOM    188  DUM DUM     0     -3.7195 15.6365  13.691                       X
+ATOM    189  DUM DUM     0     -1.7195 15.6365  13.691                       X
+ATOM    190  DUM DUM     0      8.2805 15.6365  13.691                       X
+ATOM    191  DUM DUM     0     -7.7195-26.3635  15.691                       X
+ATOM    192  DUM DUM     0     -9.7195-24.3635  15.691                       X
+ATOM    193  DUM DUM     0     -5.7195-24.3635  15.691                       X
+ATOM    194  DUM DUM     0     -7.7195-22.3635  15.691                       X
+ATOM    195  DUM DUM     0    -15.7195-20.3635  15.691                       X
+ATOM    196  DUM DUM     0     -5.7195-20.3635  15.691                       X
+ATOM    197  DUM DUM     0    -15.7195-18.3635  15.691                       X
+ATOM    198  DUM DUM     0    -15.7195-16.3635  15.691                       X
+ATOM    199  DUM DUM     0     -7.7195-12.3635  15.691                       X
+ATOM    200  DUM DUM     0     14.2805-12.3635  15.691                       X
+ATOM    201  DUM DUM     0     12.2805-10.3635  15.691                       X
+ATOM    202  DUM DUM     0     14.2805-10.3635  15.691                       X
+ATOM    203  DUM DUM     0     10.2805 -8.3635  15.691                       X
+ATOM    204  DUM DUM     0     14.2805 -8.3635  15.691                       X
+ATOM    205  DUM DUM     0     -5.7195 -2.3635  15.691                       X
+ATOM    206  DUM DUM     0     -5.7195 -0.3635  15.691                       X
+ATOM    207  DUM DUM     0    -11.7195  1.6365  15.691                       X
+ATOM    208  DUM DUM     0     -9.7195 13.6365  15.691                       X
+ATOM    209  DUM DUM     0     -1.7195 13.6365  15.691                       X
+ATOM    210  DUM DUM     0     -3.7195 15.6365  15.691                       X
+ATOM    211  DUM DUM     0     -1.7195 15.6365  15.691                       X
+ATOM    212  DUM DUM     0      8.2805 15.6365  15.691                       X
+ATOM    213  DUM DUM     0     -5.7195-26.3635  17.691                       X
+ATOM    214  DUM DUM     0     -3.7195-24.3635  17.691                       X
+ATOM    215  DUM DUM     0    -15.7195-20.3635  17.691                       X
+ATOM    216  DUM DUM     0     -7.7195-20.3635  17.691                       X
+ATOM    217  DUM DUM     0     12.2805-20.3635  17.691                       X
+ATOM    218  DUM DUM     0     14.2805-20.3635  17.691                       X
+ATOM    219  DUM DUM     0     14.2805-18.3635  17.691                       X
+ATOM    220  DUM DUM     0      6.2805-16.3635  17.691                       X
+ATOM    221  DUM DUM     0     -1.7195-12.3635  17.691                       X
+ATOM    222  DUM DUM     0      0.2805-12.3635  17.691                       X
+ATOM    223  DUM DUM     0      0.2805-10.3635  17.691                       X
+ATOM    224  DUM DUM     0      2.2805-10.3635  17.691                       X
+ATOM    225  DUM DUM     0     14.2805-10.3635  17.691                       X
+ATOM    226  DUM DUM     0     12.2805 -8.3635  17.691                       X
+ATOM    227  DUM DUM     0     14.2805 -8.3635  17.691                       X
+ATOM    228  DUM DUM     0     12.2805 -6.3635  17.691                       X
+ATOM    229  DUM DUM     0     -5.7195 -4.3635  17.691                       X
+ATOM    230  DUM DUM     0    -13.7195 -2.3635  17.691                       X
+ATOM    231  DUM DUM     0     -3.7195 -2.3635  17.691                       X
+ATOM    232  DUM DUM     0      2.2805 -2.3635  17.691                       X
+ATOM    233  DUM DUM     0      0.2805  1.6365  17.691                       X
+ATOM    234  DUM DUM     0      6.2805  1.6365  17.691                       X
+ATOM    235  DUM DUM     0     -1.7195  3.6365  17.691                       X
+ATOM    236  DUM DUM     0      2.2805  3.6365  17.691                       X
+ATOM    237  DUM DUM     0      4.2805  3.6365  17.691                       X
+ATOM    238  DUM DUM     0      6.2805  3.6365  17.691                       X
+ATOM    239  DUM DUM     0      0.2805  7.6365  17.691                       X
+ATOM    240  DUM DUM     0     14.2805  9.6365  17.691                       X
+ATOM    241  DUM DUM     0     -9.7195 11.6365  17.691                       X
+ATOM    242  DUM DUM     0      6.2805 11.6365  17.691                       X
+ATOM    243  DUM DUM     0     -9.7195 13.6365  17.691                       X
+ATOM    244  DUM DUM     0     -7.7195 13.6365  17.691                       X
+ATOM    245  DUM DUM     0      4.2805 13.6365  17.691                       X
+ATOM    246  DUM DUM     0      8.2805 13.6365  17.691                       X
+ATOM    247  DUM DUM     0     -9.7195 15.6365  17.691                       X
+ATOM    248  DUM DUM     0     -5.7195 15.6365  17.691                       X
+ATOM    249  DUM DUM     0     -3.7195 15.6365  17.691                       X
+ATOM    250  DUM DUM     0      6.2805 15.6365  17.691                       X
+ATOM    251  DUM DUM     0      8.2805 15.6365  17.691                       X
+ATOM    252  DUM DUM     0     -7.7195-26.3635  19.691                       X
+ATOM    253  DUM DUM     0     -5.7195-26.3635  19.691                       X
+ATOM    254  DUM DUM     0     -5.7195-24.3635  19.691                       X
+ATOM    255  DUM DUM     0     14.2805-16.3635  19.691                       X
+ATOM    256  DUM DUM     0      6.2805-14.3635  19.691                       X
+ATOM    257  DUM DUM     0     -7.7195-10.3635  19.691                       X
+ATOM    258  DUM DUM     0     10.2805 -6.3635  19.691                       X
+ATOM    259  DUM DUM     0     -7.7195 -4.3635  19.691                       X
+ATOM    260  DUM DUM     0     -5.7195 -4.3635  19.691                       X
+ATOM    261  DUM DUM     0     -5.7195 -2.3635  19.691                       X
+ATOM    262  DUM DUM     0     -9.7195  1.6365  19.691                       X
+ATOM    263  DUM DUM     0    -15.7195  3.6365  19.691                       X
+ATOM    264  DUM DUM     0     -7.7195  3.6365  19.691                       X
+ATOM    265  DUM DUM     0     -1.7195  3.6365  19.691                       X
+ATOM    266  DUM DUM     0     -9.7195  9.6365  19.691                       X
+ATOM    267  DUM DUM     0      8.2805  9.6365  19.691                       X
+ATOM    268  DUM DUM     0     10.2805  9.6365  19.691                       X
+ATOM    269  DUM DUM     0      6.2805 11.6365  19.691                       X
+ATOM    270  DUM DUM     0      8.2805 11.6365  19.691                       X
+ATOM    271  DUM DUM     0     10.2805 11.6365  19.691                       X
+ATOM    272  DUM DUM     0     -5.7195 15.6365  19.691                       X
+ATOM    273  DUM DUM     0     -3.7195 15.6365  19.691                       X
+ATOM    274  DUM DUM     0    -11.7195-26.3635  21.691                       X
+ATOM    275  DUM DUM     0     -7.7195-26.3635  21.691                       X
+ATOM    276  DUM DUM     0     -5.7195-26.3635  21.691                       X
+ATOM    277  DUM DUM     0     -3.7195-26.3635  21.691                       X
+ATOM    278  DUM DUM     0     -5.7195-24.3635  21.691                       X
+ATOM    279  DUM DUM     0     -5.7195-18.3635  21.691                       X
+ATOM    280  DUM DUM     0     -3.7195-18.3635  21.691                       X
+ATOM    281  DUM DUM     0      6.2805-18.3635  21.691                       X
+ATOM    282  DUM DUM     0     14.2805-16.3635  21.691                       X
+ATOM    283  DUM DUM     0      6.2805-12.3635  21.691                       X
+ATOM    284  DUM DUM     0    -15.7195-10.3635  21.691                       X
+ATOM    285  DUM DUM     0     -7.7195-10.3635  21.691                       X
+ATOM    286  DUM DUM     0     -5.7195-10.3635  21.691                       X
+ATOM    287  DUM DUM     0     -9.7195 -8.3635  21.691                       X
+ATOM    288  DUM DUM     0     -7.7195 -8.3635  21.691                       X
+ATOM    289  DUM DUM     0     -5.7195 -8.3635  21.691                       X
+ATOM    290  DUM DUM     0     -7.7195 -6.3635  21.691                       X
+ATOM    291  DUM DUM     0     -5.7195 -6.3635  21.691                       X
+ATOM    292  DUM DUM     0      2.2805 -6.3635  21.691                       X
+ATOM    293  DUM DUM     0      4.2805 -6.3635  21.691                       X
+ATOM    294  DUM DUM     0     -7.7195 -4.3635  21.691                       X
+ATOM    295  DUM DUM     0     -5.7195 -4.3635  21.691                       X
+ATOM    296  DUM DUM     0      0.2805 -2.3635  21.691                       X
+ATOM    297  DUM DUM     0     -3.7195  5.6365  21.691                       X
+ATOM    298  DUM DUM     0    -15.7195-26.3635  23.691                       X
+ATOM    299  DUM DUM     0     -9.7195-26.3635  23.691                       X
+ATOM    300  DUM DUM     0     -7.7195-26.3635  23.691                       X
+ATOM    301  DUM DUM     0     -5.7195-26.3635  23.691                       X
+ATOM    302  DUM DUM     0     -3.7195-26.3635  23.691                       X
+ATOM    303  DUM DUM     0     -7.7195-24.3635  23.691                       X
+ATOM    304  DUM DUM     0     -5.7195-24.3635  23.691                       X
+ATOM    305  DUM DUM     0     -3.7195-24.3635  23.691                       X
+ATOM    306  DUM DUM     0      0.2805-24.3635  23.691                       X
+ATOM    307  DUM DUM     0     -5.7195-22.3635  23.691                       X
+ATOM    308  DUM DUM     0     -3.7195-20.3635  23.691                       X
+ATOM    309  DUM DUM     0      6.2805-20.3635  23.691                       X
+ATOM    310  DUM DUM     0    -15.7195-18.3635  23.691                       X
+ATOM    311  DUM DUM     0     -5.7195-18.3635  23.691                       X
+ATOM    312  DUM DUM     0     -3.7195-18.3635  23.691                       X
+ATOM    313  DUM DUM     0      6.2805-18.3635  23.691                       X
+ATOM    314  DUM DUM     0    -15.7195-16.3635  23.691                       X
+ATOM    315  DUM DUM     0    -13.7195-16.3635  23.691                       X
+ATOM    316  DUM DUM     0    -15.7195-14.3635  23.691                       X
+ATOM    317  DUM DUM     0    -13.7195-14.3635  23.691                       X
+ATOM    318  DUM DUM     0    -11.7195-14.3635  23.691                       X
+ATOM    319  DUM DUM     0     -9.7195-14.3635  23.691                       X
+ATOM    320  DUM DUM     0     -5.7195-14.3635  23.691                       X
+ATOM    321  DUM DUM     0     -3.7195-14.3635  23.691                       X
+ATOM    322  DUM DUM     0    -15.7195-12.3635  23.691                       X
+ATOM    323  DUM DUM     0    -11.7195-12.3635  23.691                       X
+ATOM    324  DUM DUM     0     -7.7195-12.3635  23.691                       X
+ATOM    325  DUM DUM     0     -5.7195-12.3635  23.691                       X
+ATOM    326  DUM DUM     0    -15.7195-10.3635  23.691                       X
+ATOM    327  DUM DUM     0    -13.7195-10.3635  23.691                       X
+ATOM    328  DUM DUM     0     -9.7195-10.3635  23.691                       X
+ATOM    329  DUM DUM     0     -7.7195-10.3635  23.691                       X
+ATOM    330  DUM DUM     0    -15.7195 -8.3635  23.691                       X
+ATOM    331  DUM DUM     0    -11.7195 -8.3635  23.691                       X
+ATOM    332  DUM DUM     0     -9.7195 -8.3635  23.691                       X
+ATOM    333  DUM DUM     0     -7.7195 -8.3635  23.691                       X
+ATOM    334  DUM DUM     0     -5.7195 -8.3635  23.691                       X
+ATOM    335  DUM DUM     0      4.2805 -8.3635  23.691                       X
+ATOM    336  DUM DUM     0      4.2805 -6.3635  23.691                       X
+ATOM    337  DUM DUM     0     -3.7195  5.6365  23.691                       X
+ATOM    338  DUM DUM     0     -3.7195 13.6365  23.691                       X
+ATOM    339  DUM DUM     0      0.2805 13.6365  23.691                       X
+ATOM    340  DUM DUM     0     -3.7195 15.6365  23.691                       X
+ATOM    341  DUM DUM     0      2.2805 15.6365  23.691                       X
+ATOM    342  DUM DUM     0    -15.7195-24.3635  25.691                       X
+ATOM    343  DUM DUM     0      0.2805-22.3635  25.691                       X
+ATOM    344  DUM DUM     0      4.2805-22.3635  25.691                       X
+ATOM    345  DUM DUM     0     -7.7195-18.3635  25.691                       X
+ATOM    346  DUM DUM     0    -15.7195-16.3635  25.691                       X
+ATOM    347  DUM DUM     0    -13.7195-16.3635  25.691                       X
+ATOM    348  DUM DUM     0     -9.7195-16.3635  25.691                       X
+ATOM    349  DUM DUM     0     -5.7195-16.3635  25.691                       X
+ATOM    350  DUM DUM     0     -3.7195-16.3635  25.691                       X
+ATOM    351  DUM DUM     0    -15.7195-14.3635  25.691                       X
+ATOM    352  DUM DUM     0    -13.7195-14.3635  25.691                       X
+ATOM    353  DUM DUM     0    -11.7195-14.3635  25.691                       X
+ATOM    354  DUM DUM     0     -9.7195-14.3635  25.691                       X
+ATOM    355  DUM DUM     0     -7.7195-14.3635  25.691                       X
+ATOM    356  DUM DUM     0     -5.7195-14.3635  25.691                       X
+ATOM    357  DUM DUM     0      6.2805-14.3635  25.691                       X
+ATOM    358  DUM DUM     0     10.2805-14.3635  25.691                       X
+ATOM    359  DUM DUM     0    -15.7195-12.3635  25.691                       X
+ATOM    360  DUM DUM     0    -13.7195-12.3635  25.691                       X
+ATOM    361  DUM DUM     0    -11.7195-12.3635  25.691                       X
+ATOM    362  DUM DUM     0     -9.7195-12.3635  25.691                       X
+ATOM    363  DUM DUM     0     -7.7195-12.3635  25.691                       X
+ATOM    364  DUM DUM     0    -15.7195-10.3635  25.691                       X
+ATOM    365  DUM DUM     0    -13.7195-10.3635  25.691                       X
+ATOM    366  DUM DUM     0    -11.7195-10.3635  25.691                       X
+ATOM    367  DUM DUM     0     -9.7195-10.3635  25.691                       X
+ATOM    368  DUM DUM     0     -7.7195-10.3635  25.691                       X
+ATOM    369  DUM DUM     0    -15.7195 -8.3635  25.691                       X
+ATOM    370  DUM DUM     0    -13.7195 -8.3635  25.691                       X
+ATOM    371  DUM DUM     0    -11.7195 -8.3635  25.691                       X
+ATOM    372  DUM DUM     0     -5.7195 -8.3635  25.691                       X
+ATOM    373  DUM DUM     0     -3.7195 -8.3635  25.691                       X
+ATOM    374  DUM DUM     0      4.2805 -8.3635  25.691                       X
+ATOM    375  DUM DUM     0     -3.7195 -4.3635  25.691                       X
+ATOM    376  DUM DUM     0      6.2805  1.6365  25.691                       X
+ATOM    377  DUM DUM     0     -3.7195  3.6365  25.691                       X
+ATOM    378  DUM DUM     0      8.2805  3.6365  25.691                       X
+ATOM    379  DUM DUM     0     -5.7195  5.6365  25.691                       X
+ATOM    380  DUM DUM     0     -3.7195  5.6365  25.691                       X
+ATOM    381  DUM DUM     0     -7.7195  7.6365  25.691                       X
+ATOM    382  DUM DUM     0     -3.7195  7.6365  25.691                       X
+ATOM    383  DUM DUM     0     -1.7195  7.6365  25.691                       X
+ATOM    384  DUM DUM     0     -5.7195 11.6365  25.691                       X
+ATOM    385  DUM DUM     0     -3.7195 11.6365  25.691                       X
+ATOM    386  DUM DUM     0     -3.7195 15.6365  25.691                       X
+ATOM    387  DUM DUM     0      0.2805 15.6365  25.691                       X
+ATOM    388  DUM DUM     0      2.2805 15.6365  25.691                       X
+ATOM    389  DUM DUM     0    -15.7195-26.3635  27.691                       X
+ATOM    390  DUM DUM     0      4.2805-26.3635  27.691                       X
+ATOM    391  DUM DUM     0      6.2805-26.3635  27.691                       X
+ATOM    392  DUM DUM     0      4.2805-24.3635  27.691                       X
+ATOM    393  DUM DUM     0      2.2805-22.3635  27.691                       X
+ATOM    394  DUM DUM     0    -15.7195-18.3635  27.691                       X
+ATOM    395  DUM DUM     0    -13.7195-18.3635  27.691                       X
+ATOM    396  DUM DUM     0      0.2805-18.3635  27.691                       X
+ATOM    397  DUM DUM     0    -15.7195-16.3635  27.691                       X
+ATOM    398  DUM DUM     0    -13.7195-16.3635  27.691                       X
+ATOM    399  DUM DUM     0    -11.7195-16.3635  27.691                       X
+ATOM    400  DUM DUM     0     -7.7195-16.3635  27.691                       X
+ATOM    401  DUM DUM     0    -15.7195-14.3635  27.691                       X
+ATOM    402  DUM DUM     0    -13.7195-14.3635  27.691                       X
+ATOM    403  DUM DUM     0    -11.7195-14.3635  27.691                       X
+ATOM    404  DUM DUM     0     -9.7195-14.3635  27.691                       X
+ATOM    405  DUM DUM     0    -15.7195-12.3635  27.691                       X
+ATOM    406  DUM DUM     0    -13.7195-12.3635  27.691                       X
+ATOM    407  DUM DUM     0    -11.7195-12.3635  27.691                       X
+ATOM    408  DUM DUM     0     -9.7195-12.3635  27.691                       X
+ATOM    409  DUM DUM     0     -7.7195-12.3635  27.691                       X
+ATOM    410  DUM DUM     0      6.2805-12.3635  27.691                       X
+ATOM    411  DUM DUM     0    -13.7195-10.3635  27.691                       X
+ATOM    412  DUM DUM     0    -11.7195-10.3635  27.691                       X
+ATOM    413  DUM DUM     0     -1.7195 -8.3635  27.691                       X
+ATOM    414  DUM DUM     0      0.2805 -8.3635  27.691                       X
+ATOM    415  DUM DUM     0     12.2805 -8.3635  27.691                       X
+ATOM    416  DUM DUM     0      0.2805 -6.3635  27.691                       X
+ATOM    417  DUM DUM     0     14.2805 -6.3635  27.691                       X
+ATOM    418  DUM DUM     0     10.2805 -4.3635  27.691                       X
+ATOM    419  DUM DUM     0    -11.7195 -2.3635  27.691                       X
+ATOM    420  DUM DUM     0      4.2805 -2.3635  27.691                       X
+ATOM    421  DUM DUM     0     10.2805 -2.3635  27.691                       X
+ATOM    422  DUM DUM     0     -7.7195 -0.3635  27.691                       X
+ATOM    423  DUM DUM     0    -15.7195  1.6365  27.691                       X
+ATOM    424  DUM DUM     0    -15.7195  3.6365  27.691                       X
+ATOM    425  DUM DUM     0     -3.7195  3.6365  27.691                       X
+ATOM    426  DUM DUM     0      8.2805  7.6365  27.691                       X
+ATOM    427  DUM DUM     0     -9.7195  9.6365  27.691                       X
+ATOM    428  DUM DUM     0     -7.7195  9.6365  27.691                       X
+ATOM    429  DUM DUM     0     -3.7195  9.6365  27.691                       X
+ATOM    430  DUM DUM     0     -1.7195  9.6365  27.691                       X
+ATOM    431  DUM DUM     0      8.2805  9.6365  27.691                       X
+ATOM    432  DUM DUM     0     10.2805  9.6365  27.691                       X
+ATOM    433  DUM DUM     0     -5.7195 11.6365  27.691                       X
+ATOM    434  DUM DUM     0     -3.7195 11.6365  27.691                       X
+ATOM    435  DUM DUM     0      2.2805 15.6365  27.691                       X
+ATOM    436  DUM DUM     0    -15.7195-26.3635  29.691                       X
+ATOM    437  DUM DUM     0      4.2805-26.3635  29.691                       X
+ATOM    438  DUM DUM     0      6.2805-26.3635  29.691                       X
+ATOM    439  DUM DUM     0     14.2805-26.3635  29.691                       X
+ATOM    440  DUM DUM     0    -15.7195-24.3635  29.691                       X
+ATOM    441  DUM DUM     0    -15.7195-22.3635  29.691                       X
+ATOM    442  DUM DUM     0     14.2805-22.3635  29.691                       X
+ATOM    443  DUM DUM     0    -15.7195-20.3635  29.691                       X
+ATOM    444  DUM DUM     0     14.2805-20.3635  29.691                       X
+ATOM    445  DUM DUM     0    -15.7195-18.3635  29.691                       X
+ATOM    446  DUM DUM     0    -13.7195-18.3635  29.691                       X
+ATOM    447  DUM DUM     0      2.2805-18.3635  29.691                       X
+ATOM    448  DUM DUM     0    -15.7195-16.3635  29.691                       X
+ATOM    449  DUM DUM     0    -13.7195-16.3635  29.691                       X
+ATOM    450  DUM DUM     0      4.2805-16.3635  29.691                       X
+ATOM    451  DUM DUM     0    -15.7195-14.3635  29.691                       X
+ATOM    452  DUM DUM     0    -13.7195-14.3635  29.691                       X
+ATOM    453  DUM DUM     0    -11.7195-14.3635  29.691                       X
+ATOM    454  DUM DUM     0      6.2805-14.3635  29.691                       X
+ATOM    455  DUM DUM     0     14.2805 -4.3635  29.691                       X
+ATOM    456  DUM DUM     0    -11.7195 -2.3635  29.691                       X
+ATOM    457  DUM DUM     0     12.2805 -2.3635  29.691                       X
+ATOM    458  DUM DUM     0     14.2805 -2.3635  29.691                       X
+ATOM    459  DUM DUM     0     14.2805 -0.3635  29.691                       X
+ATOM    460  DUM DUM     0     14.2805  1.6365  29.691                       X
+ATOM    461  DUM DUM     0    -15.7195  3.6365  29.691                       X
+ATOM    462  DUM DUM     0    -13.7195  3.6365  29.691                       X
+ATOM    463  DUM DUM     0     12.2805  3.6365  29.691                       X
+ATOM    464  DUM DUM     0     14.2805  3.6365  29.691                       X
+ATOM    465  DUM DUM     0     14.2805  5.6365  29.691                       X
+ATOM    466  DUM DUM     0      6.2805  7.6365  29.691                       X
+ATOM    467  DUM DUM     0      8.2805  7.6365  29.691                       X
+ATOM    468  DUM DUM     0     14.2805  7.6365  29.691                       X
+ATOM    469  DUM DUM     0     -3.7195  9.6365  29.691                       X
+ATOM    470  DUM DUM     0      0.2805  9.6365  29.691                       X
+ATOM    471  DUM DUM     0      2.2805  9.6365  29.691                       X
+ATOM    472  DUM DUM     0      8.2805  9.6365  29.691                       X
+ATOM    473  DUM DUM     0     10.2805  9.6365  29.691                       X
+ATOM    474  DUM DUM     0     12.2805  9.6365  29.691                       X
+ATOM    475  DUM DUM     0     14.2805  9.6365  29.691                       X
+ATOM    476  DUM DUM     0     -5.7195 11.6365  29.691                       X
+ATOM    477  DUM DUM     0     -3.7195 11.6365  29.691                       X
+ATOM    478  DUM DUM     0     -1.7195 11.6365  29.691                       X
+ATOM    479  DUM DUM     0      0.2805 11.6365  29.691                       X
+ATOM    480  DUM DUM     0      2.2805 11.6365  29.691                       X
+ATOM    481  DUM DUM     0      4.2805 11.6365  29.691                       X
+ATOM    482  DUM DUM     0     -3.7195 13.6365  29.691                       X
+ATOM    483  DUM DUM     0      2.2805 13.6365  29.691                       X
+ATOM    484  DUM DUM     0     -3.7195 15.6365  29.691                       X
+ATOM    485  DUM DUM     0      0.2805 15.6365  29.691                       X
+ATOM    486  DUM DUM     0      2.2805 15.6365  29.691                       X
+ATOM    487  DUM DUM     0      2.2805-26.3635  31.691                       X
+ATOM    488  DUM DUM     0      4.2805-26.3635  31.691                       X
+ATOM    489  DUM DUM     0      6.2805-26.3635  31.691                       X
+ATOM    490  DUM DUM     0     10.2805-26.3635  31.691                       X
+ATOM    491  DUM DUM     0     14.2805-26.3635  31.691                       X
+ATOM    492  DUM DUM     0      2.2805-24.3635  31.691                       X
+ATOM    493  DUM DUM     0      4.2805-24.3635  31.691                       X
+ATOM    494  DUM DUM     0      2.2805-22.3635  31.691                       X
+ATOM    495  DUM DUM     0      6.2805-20.3635  31.691                       X
+ATOM    496  DUM DUM     0    -15.7195-16.3635  31.691                       X
+ATOM    497  DUM DUM     0    -13.7195-16.3635  31.691                       X
+ATOM    498  DUM DUM     0    -11.7195-16.3635  31.691                       X
+ATOM    499  DUM DUM     0    -15.7195-14.3635  31.691                       X
+ATOM    500  DUM DUM     0     14.2805-14.3635  31.691                       X
+ATOM    501  DUM DUM     0     10.2805 -8.3635  31.691                       X
+ATOM    502  DUM DUM     0     14.2805 -4.3635  31.691                       X
+ATOM    503  DUM DUM     0     14.2805 -2.3635  31.691                       X
+ATOM    504  DUM DUM     0    -11.7195  3.6365  31.691                       X
+ATOM    505  DUM DUM     0     14.2805  3.6365  31.691                       X
+ATOM    506  DUM DUM     0    -11.7195  5.6365  31.691                       X
+ATOM    507  DUM DUM     0     14.2805  5.6365  31.691                       X
+ATOM    508  DUM DUM     0     -3.7195  7.6365  31.691                       X
+ATOM    509  DUM DUM     0     -1.7195  9.6365  31.691                       X
+ATOM    510  DUM DUM     0     -3.7195 11.6365  31.691                       X
+ATOM    511  DUM DUM     0      2.2805 11.6365  31.691                       X
+ATOM    512  DUM DUM     0      4.2805 11.6365  31.691                       X
+ATOM    513  DUM DUM     0      2.2805-26.3635  33.691                       X
+ATOM    514  DUM DUM     0      4.2805-26.3635  33.691                       X
+ATOM    515  DUM DUM     0      6.2805-26.3635  33.691                       X
+ATOM    516  DUM DUM     0      8.2805-26.3635  33.691                       X
+ATOM    517  DUM DUM     0     10.2805-26.3635  33.691                       X
+ATOM    518  DUM DUM     0      2.2805-24.3635  33.691                       X
+ATOM    519  DUM DUM     0      4.2805-24.3635  33.691                       X
+ATOM    520  DUM DUM     0      0.2805-22.3635  33.691                       X
+ATOM    521  DUM DUM     0     -3.7195-20.3635  33.691                       X
+ATOM    522  DUM DUM     0      6.2805-18.3635  33.691                       X
+ATOM    523  DUM DUM     0    -13.7195-14.3635  33.691                       X
+ATOM    524  DUM DUM     0     -7.7195-14.3635  33.691                       X
+ATOM    525  DUM DUM     0      0.2805 -2.3635  33.691                       X
+ATOM    526  DUM DUM     0     14.2805 -0.3635  33.691                       X
+ATOM    527  DUM DUM     0     -1.7195  3.6365  33.691                       X
+ATOM    528  DUM DUM     0      4.2805  5.6365  33.691                       X
+ATOM    529  DUM DUM     0     -5.7195  7.6365  33.691                       X
+ATOM    530  DUM DUM     0     -3.7195  7.6365  33.691                       X
+ATOM    531  DUM DUM     0      2.2805-26.3635  35.691                       X
+ATOM    532  DUM DUM     0      4.2805-26.3635  35.691                       X
+ATOM    533  DUM DUM     0      6.2805-26.3635  35.691                       X
+ATOM    534  DUM DUM     0      8.2805-26.3635  35.691                       X
+ATOM    535  DUM DUM     0     10.2805-26.3635  35.691                       X
+ATOM    536  DUM DUM     0     12.2805-26.3635  35.691                       X
+ATOM    537  DUM DUM     0      2.2805-24.3635  35.691                       X
+ATOM    538  DUM DUM     0     -5.7195-16.3635  35.691                       X
+ATOM    539  DUM DUM     0    -15.7195-14.3635  35.691                       X
+ATOM    540  DUM DUM     0    -15.7195-10.3635  35.691                       X
+ATOM    541  DUM DUM     0     -3.7195-10.3635  35.691                       X
+ATOM    542  DUM DUM     0    -13.7195 -8.3635  35.691                       X
+ATOM    543  DUM DUM     0     -3.7195 -8.3635  35.691                       X
+ATOM    544  DUM DUM     0      6.2805 -4.3635  35.691                       X
+ATOM    545  DUM DUM     0     14.2805 -2.3635  35.691                       X
+ATOM    546  DUM DUM     0     -9.7195 -0.3635  35.691                       X
+ATOM    547  DUM DUM     0      4.2805  5.6365  35.691                       X
+ATOM    548  DUM DUM     0      8.2805-26.3635  37.691                       X
+ATOM    549  DUM DUM     0     10.2805-26.3635  37.691                       X
+ATOM    550  DUM DUM     0     -3.7195-20.3635  37.691                       X
+ATOM    551  DUM DUM     0    -11.7195 -8.3635  37.691                       X
+ATOM    552  DUM DUM     0      4.2805 -4.3635  37.691                       X
+ATOM    553  DUM DUM     0     10.2805 -4.3635  37.691                       X
+ATOM    554  DUM DUM     0      4.2805 -2.3635  37.691                       X
+ATOM    555  DUM DUM     0     -9.7195 -0.3635  37.691                       X
+ATOM    556  DUM DUM     0     -9.7195  1.6365  37.691                       X
+ATOM    557  DUM DUM     0     -9.7195  3.6365  37.691                       X
+ATOM    558  DUM DUM     0      2.2805  3.6365  37.691                       X
+ATOM    559  DUM DUM     0      2.2805  5.6365  37.691                       X
+ATOM    560  DUM DUM     0      4.2805  5.6365  37.691                       X
+ATOM    561  DUM DUM     0      0.2805  7.6365  37.691                       X
+ATOM    562  DUM DUM     0      2.2805  7.6365  37.691                       X
+ATOM    563  DUM DUM     0      0.2805  9.6365  37.691                       X
+ATOM    564  DUM DUM     0      8.2805-26.3635  39.691                       X
+ATOM    565  DUM DUM     0      2.2805-14.3635  39.691                       X
+ATOM    566  DUM DUM     0      4.2805-12.3635  39.691                       X
+ATOM    567  DUM DUM     0     -9.7195 -8.3635  39.691                       X
+ATOM    568  DUM DUM     0     -9.7195 -6.3635  39.691                       X
+ATOM    569  DUM DUM     0     -9.7195 -2.3635  39.691                       X
+ATOM    570  DUM DUM     0     -7.7195 -2.3635  39.691                       X
+ATOM    571  DUM DUM     0     -9.7195 -0.3635  39.691                       X
+ATOM    572  DUM DUM     0     -9.7195  1.6365  39.691                       X
+ATOM    573  DUM DUM     0      0.2805  1.6365  39.691                       X
+ATOM    574  DUM DUM     0     -9.7195  3.6365  39.691                       X
+ATOM    575  DUM DUM     0      0.2805  3.6365  39.691                       X
+ATOM    576  DUM DUM     0      2.2805  3.6365  39.691                       X
+ATOM    577  DUM DUM     0     -5.7195  5.6365  39.691                       X
+ATOM    578  DUM DUM     0      0.2805  5.6365  39.691                       X
+ATOM    579  DUM DUM     0      2.2805  5.6365  39.691                       X
+ATOM    580  DUM DUM     0      0.2805  7.6365  39.691                       X
+ATOM    581  DUM DUM     0     -1.7195  9.6365  39.691                       X
+ATOM    582  DUM DUM     0      0.2805  9.6365  39.691                       X
+ATOM    583  DUM DUM     0      2.2805  9.6365  39.691                       X
+ATOM    584  DUM DUM     0      6.2805-26.3635  41.691                       X
+ATOM    585  DUM DUM     0      2.2805-24.3635  41.691                       X
+ATOM    586  DUM DUM     0     -3.7195-20.3635  41.691                       X
+ATOM    587  DUM DUM     0      0.2805-20.3635  41.691                       X
+ATOM    588  DUM DUM     0     14.2805-20.3635  41.691                       X
+ATOM    589  DUM DUM     0      0.2805-18.3635  41.691                       X
+ATOM    590  DUM DUM     0      2.2805-18.3635  41.691                       X
+ATOM    591  DUM DUM     0      2.2805-16.3635  41.691                       X
+ATOM    592  DUM DUM     0      2.2805-12.3635  41.691                       X
+ATOM    593  DUM DUM     0      0.2805-10.3635  41.691                       X
+ATOM    594  DUM DUM     0     -9.7195 -8.3635  41.691                       X
+ATOM    595  DUM DUM     0     -7.7195 -8.3635  41.691                       X
+ATOM    596  DUM DUM     0     -5.7195 -8.3635  41.691                       X
+ATOM    597  DUM DUM     0     -9.7195 -6.3635  41.691                       X
+ATOM    598  DUM DUM     0     -7.7195 -6.3635  41.691                       X
+ATOM    599  DUM DUM     0     -9.7195 -4.3635  41.691                       X
+ATOM    600  DUM DUM     0     -7.7195 -4.3635  41.691                       X
+ATOM    601  DUM DUM     0     -3.7195 -4.3635  41.691                       X
+ATOM    602  DUM DUM     0      2.2805 -4.3635  41.691                       X
+ATOM    603  DUM DUM     0     -9.7195 -2.3635  41.691                       X
+ATOM    604  DUM DUM     0     -9.7195  1.6365  41.691                       X
+ATOM    605  DUM DUM     0      0.2805  1.6365  41.691                       X
+ATOM    606  DUM DUM     0     -1.7195  3.6365  41.691                       X
+ATOM    607  DUM DUM     0      0.2805  3.6365  41.691                       X
+ATOM    608  DUM DUM     0      2.2805  3.6365  41.691                       X
+ATOM    609  DUM DUM     0      4.2805  3.6365  41.691                       X
+ATOM    610  DUM DUM     0      0.2805  5.6365  41.691                       X
+ATOM    611  DUM DUM     0      2.2805  5.6365  41.691                       X
+ATOM    612  DUM DUM     0      4.2805  5.6365  41.691                       X
+ATOM    613  DUM DUM     0     -1.7195  7.6365  41.691                       X
+ATOM    614  DUM DUM     0      0.2805  7.6365  41.691                       X
+ATOM    615  DUM DUM     0      2.2805  7.6365  41.691                       X
+ATOM    616  DUM DUM     0      8.2805  7.6365  41.691                       X
+ATOM    617  DUM DUM     0     -3.7195  9.6365  41.691                       X
+ATOM    618  DUM DUM     0     -1.7195  9.6365  41.691                       X
+ATOM    619  DUM DUM     0      0.2805  9.6365  41.691                       X
+ATOM    620  DUM DUM     0      2.2805  9.6365  41.691                       X
+ATOM    621  DUM DUM     0      4.2805  9.6365  41.691                       X
+ATOM    622  DUM DUM     0      6.2805  9.6365  41.691                       X
+ATOM    623  DUM DUM     0      8.2805  9.6365  41.691                       X
+END
