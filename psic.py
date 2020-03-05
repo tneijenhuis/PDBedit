@@ -362,14 +362,20 @@ def write_pdb(structure, filename):
                     col6 = " " + col6
                 
                 col7 = str(atom.xcor)
+                if len(col7) > 11:
+                	col7 = col7[:11]
                 for i in range((11 - len(col7))):
                     col7 = " " + col7
 
                 col8 = str(atom.ycor)
+                if len(col8) > 8:
+                	col8 = col8[:8]
                 for i in range(8 - len(col8)):
                     col8 = " " + col8
                 
                 col9 = str(atom.zcor)
+                if len(col9) > 8:
+                	col9 = col9[:8]
                 for i in range(8 - len(col9)):
                     col9 = " " + col9
                 
@@ -675,56 +681,6 @@ def plaster_structure(gird):
  
     return empty_voxels
 
-
-struct = open_local_pdb("total.pdb")
-
-# alphas = np.empty([0])
-# for atom in struct.Atoms:
-#     #print(atom.ident)
-
-#     if atom.ident != "HETATM":
-#         addarray = np.array([atom])
-#         alphas = np.concatenate((alphas, addarray))
-
-
-
-arr = make_atom_array(struct.Atoms)
-grid = make_3d_grid(arr, 5)
-
-
-################################
-# interface = find_interface(grid)
-
-# print(len(interface))
-
-# interface_obj = Structure("Name")
-
-# for voxel in interface:
-# 	for atom in voxel.content:
-# 		for atom in atom.Residue.Atoms:
-# 			interface_obj.add_atom(atom)
-
-# write_pdb(interface_obj, "interface.pdb")
-####################################
-pocket = plaster_structure(grid)
-not_poc = Structure("dummy")
-for voxel in pocket:
-
-    x = voxel.xcor
-    y = voxel.ycor 
-    z = voxel.zcor 
-
-    dum = make_dummy(x, y, z)
-    not_poc.add_atom(dum)
-
-
-out_arr = make_atom_array(not_poc.Atoms)
-arr = make_atom_array(struct.Atoms)
-grid = make_3d_grid(arr, 2)
-
-pocket = find_pockets(grid, out_arr)
-
-print(len(pocket))
 def cluster_voxels(voxels):
 	import math
 	print("Clustering pockets")
@@ -768,6 +724,61 @@ def cluster_voxels(voxels):
 
 	return pockets
 
+struct = open_web_pdb("6T06.pdb")
+
+atoms = np.empty([0])
+for atom in struct.Atoms:
+	if atom.ident != "HETATM":
+		add_array = np.array([atom])
+		atoms = np.concatenate((atoms, add_array))
+
+# alphas = np.empty([0])
+# for atom in struct.Atoms:
+#     #print(atom.ident)
+
+#     if atom.ident != "HETATM":
+#         addarray = np.array([atom])
+#         alphas = np.concatenate((alphas, addarray))
+
+
+
+arr = make_atom_array(atoms)
+grid = make_3d_grid(arr, 5)
+
+
+################################
+# interface = find_interface(grid)
+
+# print(len(interface))
+
+# interface_obj = Structure("Name")
+
+# for voxel in interface:
+# 	for atom in voxel.content:
+# 		for atom in atom.Residue.Atoms:
+# 			interface_obj.add_atom(atom)
+
+# write_pdb(interface_obj, "interface.pdb")
+####################################
+pocket = plaster_structure(grid)
+not_poc = Structure("dummy")
+for voxel in pocket:
+
+    x = voxel.xcor
+    y = voxel.ycor 
+    z = voxel.zcor 
+
+    dum = make_dummy(x, y, z)
+    not_poc.add_atom(dum)
+
+
+out_arr = make_atom_array(not_poc.Atoms)
+arr = make_atom_array(atoms)
+grid = make_3d_grid(arr, 2)
+
+pocket = find_pockets(grid, out_arr)
+
+print(len(pocket))
 
 pockets = cluster_voxels(pocket)
 dummy = Structure("dummy")
@@ -790,7 +801,7 @@ write_pdb(dummy, "dummy.pdb")
 #         new_struct.add_atom(atom)
 
 # print(len(surfs))
-# write_pdb(struct, "total.pdb")
+write_pdb(struct, "test.pdb")
 # write_pdb(new_struct, "surf.pdb")
 
 
