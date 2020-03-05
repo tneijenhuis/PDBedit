@@ -1,7 +1,7 @@
 import data
 import numpy as np
 
-class Current_open():
+class Current_open:
     structures = []
 
     def add_struct(self, struct):
@@ -112,7 +112,7 @@ class Atom:
         self.Residue = residue
         
 
-class Voxel():
+class Voxel:
 
     def __init__(self, size, xcor, ycor, zcor):
         self.content = []
@@ -134,7 +134,7 @@ def open_pdb(pdb, name):
     pdb = iteratable PDB file
     name = name of the generated structure
     """
-
+    print("Reading {}".format(name))
     build_res = Residue()
     build_chain = Chain()
     build_structure = Structure(name)
@@ -246,7 +246,7 @@ def open_local_pdb(file):
     file = path to be parsed PDB file
     """
 
-    name = file[-8:-4]
+    name = file[:-4]
     
     with open(file) as f:
 
@@ -573,6 +573,32 @@ def surf_from_grid(gird):
 
     return surfs
 
+def find_interface(grid):
+    """
+    Finds the interface between proteins
+    """
+    interface_voxels = np.empty([0])
+    print("searching for interface")
+
+
+    for current_slice_numb in range(grid.shape[0]):
+
+        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
+        for current_line_numb in range(grid.shape[1]):
+            for current_voxel_numb in range(grid.shape[2]):
+                current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
+
+                chain_names = []
+                for atom in current_voxel.content:
+                	if atom.chain not in chain_names:
+                		chain_names.append(atom.chain)
+
+                if len(chain_names) > 1:
+                	addarray = np.array([current_voxel])
+                	interface_voxels = np.concatenate((interface_voxels, addarray))
+
+    return interface_voxels
+
 
 ######################################################
 # Everything under this line is under development 
@@ -615,7 +641,7 @@ def find_pockets(gird, neg_array):
 
                         for neg in neg_array:
                             distance = math.sqrt(math.pow(neg[1] - current_voxel.xcor, 2) + math.pow(neg[2] - current_voxel.ycor, 2) + math.pow(neg[3] - current_voxel.zcor, 2))
-                            if distance <= 5:
+                            if distance <= 4:
                                 in_struct = False
 
                         if in_struct:
@@ -627,7 +653,7 @@ def find_pockets(gird, neg_array):
 
 def plaster_structure(gird):
     """
-    finds pockets in a protein structure
+	plasters the extirior of the protein structure with dummy atoms
     """
 
     empty_voxels = np.empty([0])
@@ -649,86 +675,112 @@ def plaster_structure(gird):
  
     return empty_voxels
 
-def find_interface(grid):
-    """
-    Finds the interface between proteins
-    """
-    interface_voxels = np.empty([0])
-    print("searching for interface")
 
+struct = open_local_pdb("total.pdb")
 
-    for current_slice_numb in range(grid.shape[0]):
+# alphas = np.empty([0])
+# for atom in struct.Atoms:
+#     #print(atom.ident)
 
-        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
-        for current_line_numb in range(grid.shape[1]):
-            for current_voxel_numb in range(grid.shape[2]):
-                current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
-
-                chain_names = []
-                for atom in current_voxel.content:
-                	if atom.chain not in chain_names:
-                		chain_names.append(atom.chain)
-
-                if len(chain_names) > 1:
-                	addarray = np.array([current_voxel])
-                	interface_voxels = np.concatenate((interface_voxels, addarray))
-
-    return interface_voxels
+#     if atom.ident != "HETATM":
+#         addarray = np.array([atom])
+#         alphas = np.concatenate((alphas, addarray))
 
 
 
-struct = open_local_pdb("test/3J95.pdb")
-
-alphas = np.empty([0])
-for atom in struct.Atoms:
-    #print(atom.ident)
-
-    if atom.ident != "HETATM":
-        addarray = np.array([atom])
-        alphas = np.concatenate((alphas, addarray))
-
-
-
-arr = make_atom_array(alphas)
+arr = make_atom_array(struct.Atoms)
 grid = make_3d_grid(arr, 5)
 
-interface = find_interface(grid)
 
-print(len(interface))
+################################
+# interface = find_interface(grid)
 
-interface_obj = Structure("Name")
+# print(len(interface))
 
-for voxel in interface:
-	for atom in voxel.content:
-		for atom in atom.Residue.Atoms:
-			interface_obj.add_atom(atom)
+# interface_obj = Structure("Name")
 
-write_pdb(interface_obj, "interface.pdb")
-# pocket = plaster_structure(grid)
-# not_poc = Structure("dummy")
-# for voxel in pocket:
+# for voxel in interface:
+# 	for atom in voxel.content:
+# 		for atom in atom.Residue.Atoms:
+# 			interface_obj.add_atom(atom)
 
-#     x = voxel.xcor
-#     y = voxel.ycor 
-#     z = voxel.zcor 
+# write_pdb(interface_obj, "interface.pdb")
+####################################
+pocket = plaster_structure(grid)
+not_poc = Structure("dummy")
+for voxel in pocket:
 
-#     dum = make_dummy(x, y, z)
-#     not_poc.add_atom(dum)
+    x = voxel.xcor
+    y = voxel.ycor 
+    z = voxel.zcor 
+
+    dum = make_dummy(x, y, z)
+    not_poc.add_atom(dum)
 
 
-# out_arr = make_atom_array(not_poc.Atoms)
-# arr = make_atom_array(alphas)
-# grid = make_3d_grid(arr, 2)
+out_arr = make_atom_array(not_poc.Atoms)
+arr = make_atom_array(struct.Atoms)
+grid = make_3d_grid(arr, 2)
 
-# pocket = find_pockets(grid, out_arr)
-# dummy = Structure("dummy")
-# for voxel in pocket:
+pocket = find_pockets(grid, out_arr)
 
-#     dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
-#     dummy.add_atom(dum)
+print(len(pocket))
+def cluster_voxels(voxels):
+	import math
+	print("Clustering pockets")
+	# I use a normal list for pockets as this does not require similar axis lengths
+	pockets = []
+	neighbours = np.empty([0])
+	while len(voxels) > 0:
 
-# write_pdb(dummy, "dummy.pdb")
+		if len(neighbours) == 0:
+			current_dummy = voxels[0]
+			current_pocket = np.array([current_dummy])
+			voxels = np.delete(voxels, np.where(voxels == current_dummy))
+			for dummy in voxels:
+				distance = math.sqrt(math.pow(dummy.xcor - current_dummy.xcor, 2) + math.pow(dummy.ycor - current_dummy.ycor, 2) + math.pow(dummy.zcor - current_dummy.zcor, 2))
+				if distance == dummy.size:
+					addarray = np.array([dummy])
+					current_pocket = np.concatenate((current_pocket, addarray))
+					neighbours = np.concatenate((neighbours, addarray))
+					voxels = np.delete(voxels, np.where(voxels == dummy))
+
+
+
+		else:
+			for neighbour in neighbours:
+				current_dummy = neighbour
+				for dummy in voxels:
+					distance = math.sqrt(math.pow(dummy.xcor - current_dummy.xcor, 2) + math.pow(dummy.ycor - current_dummy.ycor, 2) + math.pow(dummy.zcor - current_dummy.zcor, 2))
+					if distance == dummy.size:
+						addarray = np.array([dummy])
+						current_pocket = np.concatenate((current_pocket, addarray))
+						neighbours = np.concatenate((neighbours, addarray))
+						voxels = np.delete(voxels, np.where(voxels == dummy))
+
+				neighbours = np.delete(neighbours, np.where(neighbours == current_dummy))
+		
+		if len(neighbours) == 0:
+
+			if len(current_pocket) > 20:
+				pockets.append(current_pocket)
+			voxels = np.delete(voxels, np.where(voxels == current_pocket))
+
+	return pockets
+
+
+pockets = cluster_voxels(pocket)
+dummy = Structure("dummy")
+for pocket in pockets:
+
+    for voxel in pocket:
+    	dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
+    	dummy.add_atom(dum)
+
+write_pdb(dummy, "dummy.pdb")
 # write_pdb(not_poc, "plastered.pdb")
+
+##########################
 # surfs = surf_from_grid(grid)
 
 # new_struct = Structure("Name")
