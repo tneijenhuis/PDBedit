@@ -402,15 +402,18 @@ def write_pdb(structure, filename):
 def make_atom_array(atoms):
     """ Takes a list of atom objects and returns a list of its positions
     """
+    if len(atoms) == 0:
+        print("An empty list cannot be converted")
 
-    for i, atom in enumerate(atoms):
-        if i == 0:
-            array = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
-        else:
-            addarray = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
-            array = np.concatenate((array, addarray))
+    else:
+        for i, atom in enumerate(atoms):
+            if i == 0:
+                array = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
+            else:
+                addarray = np.array([[atom, atom.xcor, atom.ycor, atom.zcor]])
+                array = np.concatenate((array, addarray))
 
-    return array
+        return array
 
 
 def make_3d_grid(array, voxel_size = 5):
@@ -567,7 +570,7 @@ def surf_from_grid(gird):
                     neighbour3 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb]
                     neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
                     neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
-                    neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1]   
+                    neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1]  
 
                     if (neighbour1.empty or neighbour2.empty or neighbour3.empty or neighbour4.empty or neighbour5.empty or neighbour6.
                     empty) and current_voxel.empty == False: 
@@ -629,6 +632,9 @@ def fill_void(grid, neg_array):
                 if (current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or 
                     current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 ):
                     pass
+                
+
+
                 else:
 
                     neighbour1 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb]
@@ -637,11 +643,38 @@ def fill_void(grid, neg_array):
                     neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
                     neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
                     neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1] 
+                    # neighbour7 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb] 
+                    # neighbour8 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb - 1] 
+                    # neighbour9 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb + 1]
+                    # neighbour10 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb - 1]
+                    # neighbour11 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb + 1]                                      
+                    # neighbour12 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb] 
+                    # neighbour13 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb - 1] 
+                    # neighbour14 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb + 1] 
+                    # neighbour15 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb] 
+                    # neighbour16 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb - 1] 
+                    # neighbour17 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb + 1] 
+                    # neighbour18 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb] 
+                    # neighbour19 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb - 1] 
+                    # neighbour20 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb + 1]
+                    # neighbour21 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb - 1] 
+                    # neighbour22 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb + 1] 
+                    # neighbour23 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb - 1] 
+                    # neighbour24 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb + 1] 
+                    # neighbour25 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb - 1] 
+                    # neighbour26 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb + 1] 
 
 
                     if current_voxel.empty and (neighbour1.empty and neighbour2.empty and
-                        neighbour3.empty and neighbour4.empty and neighbour5.empty and
-                        neighbour6.empty):
+                            neighbour3.empty and neighbour4.empty and neighbour5.empty and
+                            neighbour6.empty): 
+                            # and neighbour7.empty and neighbour8.empty and
+                            # neighbour9.empty and neighbour10.empty and neighbour11.empty and
+                            # neighbour12.empty and neighbour13.empty and neighbour14.empty and
+                            # neighbour15.empty and neighbour16.empty and neighbour17.empty and
+                            # neighbour18.empty and neighbour19.empty and neighbour20.empty and
+                            # neighbour21.empty and neighbour22.empty and neighbour23.empty and
+                            # neighbour24.empty and neighbour25.empty and neighbour26.empty):
 
                         in_struct = True
 
@@ -666,24 +699,45 @@ def plaster_structure(grid):
     print("plastering")
   
     for current_slice_numb in range(grid.shape[0]):
-
         print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
         for current_line_numb in range(grid.shape[1]):
             for current_voxel_numb in range(grid.shape[2]):
                 current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
 
-                if (current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or current_voxel.empty or
+                if (current_slice_numb == 0 or current_slice_numb == grid.shape[0] - 1 or current_line_numb == 0 or
                     current_line_numb == grid.shape[1] -1 or current_voxel_numb == 0 or current_voxel_numb == grid.shape[2] -1 ):
+                        
+                        addarray = np.array([current_voxel])
+                        empty_voxels = np.concatenate((empty_voxels, addarray))
 
+
+
+                elif current_voxel.empty:
+                    
+                    neighbour1 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb]
+                    neighbour2 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb]
+                    neighbour3 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb]
+                    neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
+                    neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
+                    neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1] 
+                    neighbours = [neighbour1, neighbour2, neighbour3, neighbour4, neighbour5, neighbour6]
+
+                    empty_neighbours = 0
+                    for neighbour in neighbours:
+                        if neighbour.empty:
+                            empty_neighbours += 1
+                    
+                    if empty_neighbours > 2:
+                    
                         addarray = np.array([current_voxel])
                         empty_voxels = np.concatenate((empty_voxels, addarray))
  
-    
     plaster = Structure("plaster")
     
     for voxel in empty_voxels:
         dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
         plaster.add_atom(dum)
+    
     return plaster
 
 def cluster_voxels(voxels):
@@ -701,7 +755,7 @@ def cluster_voxels(voxels):
 
             for dummy in voxels:
                 distance = math.sqrt(math.pow(dummy.xcor - current_dummy.xcor, 2) + math.pow(dummy.ycor - current_dummy.ycor, 2) + math.pow(dummy.zcor - current_dummy.zcor, 2))
-                if distance < dummy.size*2:
+                if distance == dummy.size*2:
                     addarray = np.array([dummy])
                     current_pocket = np.concatenate((current_pocket, addarray))
                     neighbours = np.concatenate((neighbours, addarray))
@@ -712,7 +766,7 @@ def cluster_voxels(voxels):
                 current_dummy = neighbour
                 for dummy in voxels:
                     distance = math.sqrt(math.pow(dummy.xcor - current_dummy.xcor, 2) + math.pow(dummy.ycor - current_dummy.ycor, 2) + math.pow(dummy.zcor - current_dummy.zcor, 2))
-                    if distance < dummy.size*2:
+                    if distance == dummy.size:
                         addarray = np.array([dummy])
                         current_pocket = np.concatenate((current_pocket, addarray))
                         neighbours = np.concatenate((neighbours, addarray))
@@ -721,8 +775,7 @@ def cluster_voxels(voxels):
                 neighbours = np.delete(neighbours, np.where(neighbours == current_dummy))
         
         if len(neighbours) == 0:
-            print(len(current_pocket))
-
+            
             if len(current_pocket) > 20:
                 pockets.append(current_pocket)
 
@@ -750,12 +803,11 @@ def find_pockets(structure):
     pocket_potential = fill_void(grid, plaster_array)
 
     pockets = cluster_voxels(pocket_potential)
-    print(pockets)
 
-    return pockets, pocket_potential
+    return pockets
 
     
-struct = open_local_pdb("data/receptor.pdb")
+struct = open_local_pdb("fabp4/receptor.pdb")
 
 # atoms = np.empty([0])
 # for atom in struct.Atoms:
@@ -816,7 +868,7 @@ struct = open_local_pdb("data/receptor.pdb")
 # print(len(pocket))
 
 
-pockets, pocket_potential = find_pockets(struct)
+pockets = find_pockets(struct)
 
 best_pocket = []
 for pocket in pockets:
