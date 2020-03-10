@@ -134,7 +134,7 @@ def open_pdb(pdb, name):
     pdb = iteratable PDB file
     name = name of the generated structure
     """
-    print("Reading {}".format(name))
+    # print("Reading {}".format(name))
     build_res = Residue()
     build_chain = Chain()
     build_structure = Structure(name)
@@ -428,7 +428,7 @@ def make_3d_grid(array, voxel_size = 5):
     voxel_size (default 5) = the cubic size of each voxel
     """
 
-    print("Separating atoms into voxels of size {} A^3".format(voxel_size))
+    # print("Separating atoms into voxels of size {} A^3".format(voxel_size))
     
     axis1 = 0
     axis2 = 1
@@ -619,12 +619,12 @@ def fill_void(grid, neg_array):
     import math
 
     empty_voxels = np.empty([0])
-    print("Searching for pockets")
+    # print("Searching for pockets")
 
 
     for current_slice_numb in range(grid.shape[0]):
 
-        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
+        # print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
         for current_line_numb in range(grid.shape[1]):
             for current_voxel_numb in range(grid.shape[2]):
                 current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
@@ -643,38 +643,11 @@ def fill_void(grid, neg_array):
                     neighbour4 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb]
                     neighbour5 = grid[current_slice_numb, current_line_numb, current_voxel_numb - 1]
                     neighbour6 = grid[current_slice_numb, current_line_numb, current_voxel_numb + 1] 
-                    # neighbour7 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb] 
-                    # neighbour8 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb - 1] 
-                    # neighbour9 = grid[current_slice_numb - 1, current_line_numb - 1, current_voxel_numb + 1]
-                    # neighbour10 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb - 1]
-                    # neighbour11 = grid[current_slice_numb - 1, current_line_numb, current_voxel_numb + 1]                                      
-                    # neighbour12 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb] 
-                    # neighbour13 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb - 1] 
-                    # neighbour14 = grid[current_slice_numb - 1, current_line_numb + 1, current_voxel_numb + 1] 
-                    # neighbour15 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb] 
-                    # neighbour16 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb - 1] 
-                    # neighbour17 = grid[current_slice_numb + 1, current_line_numb - 1, current_voxel_numb + 1] 
-                    # neighbour18 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb] 
-                    # neighbour19 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb - 1] 
-                    # neighbour20 = grid[current_slice_numb + 1, current_line_numb + 1, current_voxel_numb + 1]
-                    # neighbour21 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb - 1] 
-                    # neighbour22 = grid[current_slice_numb + 1, current_line_numb, current_voxel_numb + 1] 
-                    # neighbour23 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb - 1] 
-                    # neighbour24 = grid[current_slice_numb, current_line_numb - 1, current_voxel_numb + 1] 
-                    # neighbour25 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb - 1] 
-                    # neighbour26 = grid[current_slice_numb, current_line_numb + 1, current_voxel_numb + 1] 
 
 
                     if current_voxel.empty and (neighbour1.empty and neighbour2.empty and
                             neighbour3.empty and neighbour4.empty and neighbour5.empty and
                             neighbour6.empty): 
-                            # and neighbour7.empty and neighbour8.empty and
-                            # neighbour9.empty and neighbour10.empty and neighbour11.empty and
-                            # neighbour12.empty and neighbour13.empty and neighbour14.empty and
-                            # neighbour15.empty and neighbour16.empty and neighbour17.empty and
-                            # neighbour18.empty and neighbour19.empty and neighbour20.empty and
-                            # neighbour21.empty and neighbour22.empty and neighbour23.empty and
-                            # neighbour24.empty and neighbour25.empty and neighbour26.empty):
 
                         in_struct = True
 
@@ -696,10 +669,10 @@ def plaster_structure(grid):
     """
 
     empty_voxels = np.empty([0])
-    print("plastering")
+    #print("plastering")
   
     for current_slice_numb in range(grid.shape[0]):
-        print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
+        # print("{}%".format((float(current_slice_numb)/float(grid.shape[0])*100)))
         for current_line_numb in range(grid.shape[1]):
             for current_voxel_numb in range(grid.shape[2]):
                 current_voxel = grid[current_slice_numb, current_line_numb, current_voxel_numb]
@@ -742,7 +715,7 @@ def plaster_structure(grid):
 
 def cluster_voxels(voxels):
     import math
-    print("Clustering pockets")
+    #print("Clustering pockets")
     # I use a normal list for pockets as this does not require similar axis lengths
     pockets = []
     neighbours = np.empty([0])
@@ -806,111 +779,6 @@ def find_pockets(structure):
 
     return pockets
 
-    
-struct = open_local_pdb("fabp4/receptor.pdb")
-
-# atoms = np.empty([0])
-# for atom in struct.Atoms:
-#   if atom.ident != "HETATM":
-#       add_array = np.array([atom])
-#       atoms = np.concatenate((atoms, add_array))
-
-# alphas = np.empty([0])
-# for atom in struct.Atoms:
-#     #print(atom.ident)
-
-#     if atom.ident != "HETATM":
-#         addarray = np.array([atom])
-#         alphas = np.concatenate((alphas, addarray))
-
-
-
-# arr = make_atom_array(atoms)
-# grid = make_3d_grid(arr, 5)
-
-
-
-
-
-################################
-# interface = find_interface(grid)
-
-# print(len(interface))
-
-# interface_obj = Structure("Name")
-
-# for voxel in interface:
-#   for atom in voxel.content:
-#       for atom in atom.Residue.Atoms:
-#           interface_obj.add_atom(atom)
-
-# write_pdb(interface_obj, "interface.pdb")
-####################################
-
-# pocket = plaster_structure(grid)
-# not_poc = Structure("dummy")
-# for voxel in pocket:
-
-#     x = voxel.xcor
-#     y = voxel.ycor 
-#     z = voxel.zcor 
-
-#     dum = make_dummy(x, y, z)
-#     not_poc.add_atom(dum)
-
-
-# out_arr = make_atom_array(not_poc.Atoms)
-# arr = make_atom_array(atoms)
-# grid = make_3d_grid(arr, 2)
-
-# pocket = fill_void(grid, out_arr)
-
-# print(len(pocket))
-
-
-pockets = find_pockets(struct)
-
-best_pocket = []
-for pocket in pockets:
-    if len(best_pocket) < len(pocket):
-        best_pocket = pocket
-
-best_pocket_struct = Structure("dummy")
-for voxel in best_pocket:
-    dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
-    best_pocket_struct.add_atom(dum)
-
-
-all_pocket_struct = Structure("all")
-for pocket in pockets:
-    for voxel in best_pocket:
-        dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
-        all_pocket_struct.add_atom(dum)
-
-potential = Structure("name")
-for voxel in pocket_potential:
-    dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
-    potential.add_atom(dum)
-
-write_pdb(all_pocket_struct, "pockets.pdb")
-write_pdb(potential, "all.pdb")
-write_pdb(best_pocket_struct, "best.pdb")
-
-# write_pdb(dummy, "dummy.pdb")
-# # write_pdb(not_poc, "plastered.pdb")
-
-##########################
-# surfs = surf_from_grid(grid)
-
-# new_struct = Structure("Name")
-
-# for res in surfs:
-#     for atom in res.Atoms:
-#         new_struct.add_atom(atom)
-
-# print(len(surfs))
-# write_pdb(struct, "test.pdb")
-# write_pdb(new_struct, "surf.pdb")
 
 def open_mol2(file):
 
@@ -948,6 +816,36 @@ def compare_pocket_to_ligand(pocket, ligand):
         distances.append(distance)
     mean = (sum(distances) / len(distances))
     return mean
+
+################################################################3##
+    
+# struct = open_local_pdb("pnph/receptor.pdb")
+
+
+# pockets = find_pockets(struct)
+
+# best_pocket = []
+# for pocket in pockets:
+#     if len(best_pocket) < len(pocket):
+#         best_pocket = pocket
+
+# best_pocket_struct = Structure("dummy")
+# for voxel in best_pocket:
+#     dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
+#     best_pocket_struct.add_atom(dum)
+
+
+# all_pocket_struct = Structure("all")
+# for pocket in pockets:
+#     for voxel in best_pocket:
+#         dum = make_dummy(voxel.xcor, voxel.ycor, voxel.zcor)
+#         all_pocket_struct.add_atom(dum)
+
+
+# write_pdb(all_pocket_struct, "pockets.pdb")
+# write_pdb(best_pocket_struct, "best.pdb")
+
+
 
 
 
