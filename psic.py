@@ -822,8 +822,14 @@ def open_mol2(file, name):
 
             if reading and line.strip() != "@<TRIPOS>ATOM":
                 line = line.split()
-                atom = Atom(line[1], line[5])
+                atom = Atom(line[1], line[5].split(".")[0])
                 atom.set_pos(line[2], line[3], line[4])
+                atom.set_ident("ATOM")
+                atom.set_residue("LIG", 1)
+                atom.set_chain("")
+                atom.set_occupancy("")
+                atom.set_tempf("")
+                atom.set_segid("")
                 molecule.add_atom(atom)
     return molecule
 
@@ -845,33 +851,32 @@ def compare_pocket_to_ligand(pocket, ligand):
 
 ################################################################3##
     
-struct = open_local_pdb("../benchmark/all/tgfr1/receptor.pdb")
+# struct = open_local_pdb("data/receptor.pdb")
 
 
-pockets = find_pockets(struct)
+# pockets = find_pockets(struct)
 
-best_pocket = []
-for pocket in pockets:
-    if len(best_pocket) < len(pocket):
-        best_pocket = pocket
+# best_pocket = []
+# for pocket in pockets:
+#     if len(best_pocket) < len(pocket):
+#         best_pocket = pocket
 
-best_pocket_struct = Structure("dummy")
-for voxel in best_pocket:
-    dum = make_dummy(voxel.x, voxel.y, voxel.z)
-    best_pocket_struct.add_atom(dum)
-
-
-all_pocket_struct = Structure("all")
-for pocket in pockets:
-    for voxel in pocket:
-        dum = make_dummy(voxel.x, voxel.y, voxel.z)
-        all_pocket_struct.add_atom(dum)
+# best_pocket_struct = Structure("dummy")
+# for voxel in best_pocket:
+#     dum = make_dummy(voxel.x, voxel.y, voxel.z)
+#     best_pocket_struct.add_atom(dum)
 
 
-write_pdb(all_pocket_struct, "pockets.pdb")
-write_pdb(best_pocket_struct, "best.pdb")
+# all_pocket_struct = Structure("all")
+# for pocket in pockets:
+#     for voxel in pocket:
+#         dum = make_dummy(voxel.x, voxel.y, voxel.z)
+#         all_pocket_struct.add_atom(dum)
 
 
+# write_pdb(all_pocket_struct, "pockets.pdb")
+# write_pdb(best_pocket_struct, "best.pdb")
 
+ligand = open_mol2("data/crystal_ligand.mol2", "ligand")
 
-
+write_pdb(ligand, "ligand.pdb")
