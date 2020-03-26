@@ -1,117 +1,178 @@
-import data
 import numpy as np
-
-class Current_open:
-    structures = []
-
-    def add_struct(self, struct):
-        self.structures.append(structatom)
 
 class Structure:
     
     def __init__(self, name):
         self.name = name
-        self.Chains =  np.empty([0])
-        self.Residues =  np.empty([0])
-        self.Atoms = np.empty([0])
-        self.chainnames =  []
+        self.chains =  np.empty([0])
+        self.residues =  np.empty([0])
+        self.atoms = np.empty([0])
+        self._chain_names =  []
+        self._residue_numbers = {}
 
-    def add_chain(self, chain):
-        addarray = np.array([chain])
-        self.Chains = np.concatenate((self.Chains, addarray))
-    
-    def add_residue(self, residue):
-        addarray = np.array([residue])
-        self.Residues = np.concatenate((self.Residues, addarray))
-    
-    def add_atom(self, atom):
-        addarray = np.array([atom])
-        self.Atoms = np.concatenate((self.Atoms, addarray))
-        atom.set_struct(self)
-
-    def add_chainname(self, chainname):
-        self.chainnames.append(chainname)    
-
-   
 class Chain:
 
-    def __init__(self):
-        self.Residues = []
-        self.Atoms = []
-        self.name = ""
-    
-    def add_atom(self, atom):
-        self.Atoms.append(atom)
-
-    def add_residue(self, residue):
-        self.Residues.append(residue)
-
-    def set_name(self, name):
+    def __init__(self, name):
+        self.residues = np.empty([0])
+        self.atoms = np.empty([0])
         self.name = name
-        
-        return self.name
-
+    
     
 class Residue:
 
-    def __init__(self):
-        self.Atoms = []
-        self.name = ""
-        self.nmbr = 0
-
-    def add_atom(self, atom):
-        self.Atoms.append(atom)
-
-    def set_nmbr(self, nmbr):
-        self.nmbr = nmbr
-
-        return self.nmbr
-
-    def set_name(self, name):
+    def __init__(self, name, number=0):
+        self.atoms = np.empty([0])
         self.name = name
-
-        return self.name
-
+        self.number = number
 
 
 class Atom:
     """Contains all information of each atom from the PDB file"""
 
-    def  __init__(self, name, element,):
+    def  __init__(self, identifier, name, residue_name, chain_name, residue_number, x, y, z, 
+            occupancy, temperature_factor, segment_id, element, structure = None, chain = None, 
+            residue = None):
+
+        self.identifier = identifier
         self.name = name
-        self.element = element
-
-    def set_ident(self, ident):
-        self.ident = ident
-
-    def set_chain(self, chain):
-        self.chain = chain
-        
-    def set_residue(self, resname, resnmbr):
-        self.resname = resname
-        self.resnmbr = resnmbr
-
-    def set_pos(self, x, y, z):
-        self.x = float(x)
-        self.y = float(y)
-        self.z = float(z)
-        
-
-    def set_tempf(self, tempf):
-        self.tempf = tempf
-        
-    def set_segid(self,segid):
-        self.segid = segid
-
-    def set_occupancy(self, occupancy):
+        self.residue_name = residue_name
+        self.chain_name = chain_name
+        self.residue_number = residue_number
+        self.x = x
+        self.y = y
+        self.z = z
         self.occupancy = occupancy
+        self.temperature_factor = temperature_factor
+        self.segment_id = segment_id
+        self.element = element
+        self.structure = structure
+        self.chain = chain
+        self.residue = residue
 
-    def set_struct(self, structure):
-        self.Structure = structure
+class Parser:
 
-    def set_Residue(self, residue):
-        self.Residue = residue
+    def __init__(self, file, local=True):
+        self.file = file
+        self.local = local
+
+    def parse(self):
+
+        name = self.file.split("/")[-1].split(".")[0]
+
+        if self.file[-4:] == ".pdb":
+            if self.local:
+                with open(self.file) as pdb:
+                    structure = self.read_pdb(pdb, name)
+            else:
+                import urllib3
+                
+                http = urllib3.PoolManager()
+                page = http.request('GET', "https://files.rcsb.org/view/{}".format(pdb))
+                f = page.data.decode("utf-8")
+                pdb = f.split("\n")
+                structure = self.read_pdb(pdb, name)
+
+        return structure
+
+    def read_pdb(self, pdb, name):
+        """Function takes a PDB formatted file and returns a Structure object which contains all atom information of the file"""
+
+        current_structure = Structure(name)
+        current_chain = ""
+        current_residue = ""
+
+        for line in pdb:
+           
+            identifier = line[0:6].strip() #identifier 
+            
+            if identifier == "ATOM" or identifier == "HETATM":      
+           
+                number = line[6:12].strip()     #atomnmbr
+                name = line[12:17].strip()      #atom
+                residue_name = line[17:20].strip()   #residue
+                chain_name = line[21].strip()        #chain
+                residue_number = line[22:26].strip()   #resnmbr
+                col7 = line[26].strip()         #?
+                x = line[30:38].strip()         #X
+                y = line[38:46].strip()         #Y      
+                z = line[46:54].strip()         #z
+                occupancy = line[54:60].strip()     #occupancy
+                temperature_factor = line[60:66].strip()     #Temperature factor
+                segid = line[72:76].strip()     #Segment identifer
+                element = line[76:78].strip()   #element symbol
+                
+                atom = Atom(identifier, name, residue_name, chain_name, residue_number, x, y, z, occupancy,
+                temperature_factor, segid, element)
+
+                self._add_atom(current_structure, atom)
+
+        return current_structure
+
+
+    def _add_atom(self, structure, atom):
+
+        global current_chain
+        global current_residue
+        addarray = np.array([atom])
+        structure.atoms = np.concatenate((structure.atoms, addarray))
+        atom.structure = structure
+
+        # Find the chain of the atom
+        if atom.chain_name not in structure._chain_names:
+            current_chain = self._make_new_chain(structure, atom)
+            
+        elif atom.chain_name != current_chain.name:
+            current_chain = structure.chains[structure._chain_names.index(atom.chain)]
+
+        atom.chain = current_chain
+
+
+        # Find the residue of the atom
         
+        if atom.residue_number not in structure._residue_numbers[current_chain.name]:
+            current_residue = self._make_new_residue(structure, atom)
+            self._add_residue_to_chain(current_residue, current_chain)
+        
+        atom.residue = current_residue
+        self._add_atom_to_residue(atom, current_residue)
+
+        return structure
+        
+
+    def _make_new_chain(self, structure, atom):
+        current_chain = Chain(atom.chain_name)
+        self._add_chain_to_structure(structure, current_chain)
+        structure._chain_names.append(atom.chain_name)
+        structure._residue_numbers[current_chain.name] = []    
+        return current_chain
+
+    def _add_atom_to_chain(self, atom, chain):
+        addarray = np.array([atom])
+        chain.atoms = np.concatenate([chain.atoms, addarray])
+
+    def _add_chain_to_structure(self, structure, chain):
+        addarray = np.array([chain])
+        structure.chains = np.concatenate((structure.chains, addarray))
+
+    def _make_new_residue(self, structure, atom):
+        current_residue = Residue(atom.residue_name, atom.residue_number)
+        self._add_residue_to_structure(structure, current_residue)
+        structure._residue_numbers[atom.chain_name].append(atom.residue_number)
+        return current_residue
+    
+    def _add_residue_to_structure(self, structure, residue):
+        addarray = np.array([residue])
+        structure.residues = np.concatenate((structure.residues, addarray))
+
+    def _add_atom_to_residue(self, atom, residue):
+        addarray = np.array([atom])
+        residue.atoms = np.concatenate([residue.atoms, addarray])
+
+
+    def _add_residue_to_chain(self, residue, chain):
+        addarray = np.array([residue])
+        chain.residues = np.concatenate([chain.atoms, addarray])
+    
 
 class Voxel:
 
@@ -133,157 +194,6 @@ class Voxel:
         self.content.append(content)
         self.empty = False
 
-def open_pdb(pdb, name):
-    """
-    Function takes a PDB formatted file and returns a Structure object which contains all atom information of the file
-    ---------------
-    arguments :
-    pdb = iteratable PDB file
-    name = name of the generated structure
-    """
-    # print("Reading {}".format(name))
-    build_res = Residue()
-    build_chain = Chain()
-    build_structure = Structure(name)
-
-    for line in pdb:
-       
-        identifier = line[0:6].strip() #identifier 
-        
-        if identifier == "ATOM" or identifier == "HETATM":      
-       
-            atomnmbr = line[6:12].strip()   #atomnmbr
-            atomname = line[12:17].strip()  #atom
-            resname = line[17:20].strip()   #residue
-            chain = line[21].strip()        #chain
-            resnmbr = line[22:26].strip()   #resnmbr
-            col7 = line[26].strip()         #?
-            x = line[30:38].strip()         #X
-            y = line[38:46].strip()         #Y      
-            z = line[46:54].strip()         #z
-            occup = line[54:60].strip()     #occupancy
-            tempf = line[60:66].strip()     #Temperature factor
-            segid = line[72:76].strip()     #Segment identifer
-            element = line[76:78].strip()   #element symbol
-            
-            atom = Atom(atomname, element)
-            atom.set_struct(build_structure)
-            atom.set_Residue(build_res)
-            atom.set_ident(identifier)
-            atom.set_residue(resname, resnmbr)
-            atom.set_chain(chain)
-            atom.set_pos(x, y, z)
-            atom.set_tempf(tempf)
-            atom.set_occupancy(occup)
-            atom.set_segid(segid)
-
-
-            #building residues from atoms
-            if len(build_res.Atoms) == 0  or build_res.Atoms[0].resnmbr == atom.resnmbr and build_chain.Atoms[0].chain == atom.chain:
-                build_res.add_atom(atom)
-                build_chain.add_atom(atom)
-                build_structure.add_atom(atom)
-                
-            #building chains from residues
-            elif len(build_chain.Residues) == 0 or build_chain.Atoms[0].chain == atom.chain:
-                build_res.set_nmbr(build_res.Atoms[0].resnmbr)
-                build_res.set_name(build_res.Atoms[0].resname)
-                build_chain.add_residue(build_res)
-                build_structure.add_residue(build_res)
-                build_res = Residue()
-                build_res.add_atom(atom)
-                build_chain.add_atom(atom)
-                build_structure.add_atom(atom)
-
-            elif atom.chain in build_structure.chainnames:
-                build_res.set_nmbr(build_res.Atoms[0].resnmbr)
-                build_res.set_name(build_res.Atoms[0].resname)
-                build_chain.add_residue(build_res)
-                build_chain.set_name(build_res.Atoms[0].chain)
-                
-                if build_chain.name not in build_structure.chainnames:
-                    build_structure.add_chain(build_chain)
-                    build_structure.add_chainname(build_chain.name)
-                
-                build_chain = build_structure.Chains[build_structure.chainnames.index(atom.chain)]
-                build_res = Residue()
-                build_res.add_atom(atom)
-                build_chain.add_atom(atom)
-                build_structure.add_atom(atom)
-
-            else:
-                build_res.set_nmbr(build_res.Atoms[0].resnmbr)
-                build_res.set_name(build_res.Atoms[0].resname)
-                build_chain.add_residue(build_res)
-                build_chain.set_name(build_res.Atoms[0].chain)
-                #build_structure.add_chain(build_chain)
-                
-                if build_chain.name not in build_structure.chainnames:
-                    build_structure.add_chain(build_chain)
-                    build_structure.add_chainname(build_chain.name)
-
-                build_chain = Chain()
-                build_res = Residue()
-                build_res.add_atom(atom)
-                build_chain.add_atom(atom)
-                build_structure.add_atom(atom)
-
-
-    build_res.set_nmbr(build_res.Atoms[0].resnmbr)
-    build_res.set_name(build_res.Atoms[0].resname)
-    build_chain.add_residue(build_res)
-    build_structure.add_residue(build_res)
-    build_chain.set_name(build_res.Atoms[0].chain)
-
-    if atom.chain not in build_structure.chainnames:
-        build_structure.add_chain(build_chain)
-        build_structure.add_chainname(build_chain.name)
-
-    Current_open.structures.append(build_structure)
-    
-    return build_structure
-
-
-def open_local_pdb(file):
-    """
-    This function opens a local PDB file and generates a Structure object
-    ---------
-    arguments:
-    file = path to be parsed PDB file
-    """
-
-    name = file[:-4]
-    
-    with open(file) as f:
-
-        structure = open_pdb(f, name)
-
-    return structure
-
-
-def open_web_pdb(pdb):
-    """
-    Parses a PDB structure from the web and returns a Structure object
-    ------------------------
-    arguments:
-    pdb = name of the pdb structure
-    """
-
-    import urllib3
-    http = urllib3.PoolManager()
-
-    if ".pdb" not in pdb:
-        pdb += ".pdb"
-
-    name = pdb[:-4]
-    page = http.request('GET', "https://files.rcsb.org/view/{}".format(pdb))
-    
-    f = page.data.decode("utf-8")
-    file =f.split("\n")
-
-    structure = open_pdb(file, name)
-
-    return structure
     
 def make_dummy(x, y, z):
 
@@ -310,6 +220,8 @@ def write_pdb(structure, filename):
     filename = PATH + name of the to be generated file
     """
 
+    import data
+
     if ".pdb" not in filename:
         print("can only make files witb pdb extention")
         
@@ -320,7 +232,7 @@ def write_pdb(structure, filename):
             for atom in atoms:
                 
                 if atom_nmbr > 0:
-                    if col4.strip() in data.protein_aa and atom.resname in data.protein_aa and col5.strip() != atom.chain:
+                    if col4.strip() in data.protein_aa and atom.residue_name in data.protein_aa and col5.strip() != atom.chain:
                         
                         atom_nmbr += 1
                         
@@ -329,7 +241,7 @@ def write_pdb(structure, filename):
                             col2 = " " + col2
                         
                         f.write("TER   {}     {}{}{}\n".format(col2, col4, col5, col6))
-                    elif col4.strip() in data.protein_aa and atom.resname not in data.protein_aa:
+                    elif col4.strip() in data.protein_aa and atom.residue_name not in data.protein_aa:
 
                         atom_nmbr += 1
                         
@@ -341,7 +253,7 @@ def write_pdb(structure, filename):
 
                 atom_nmbr +=1
                 
-                col1 = atom.ident
+                col1 = atom.identifier
                 for i in range((6 - len(col1))):
                     col1 = col1 + " "
                 
@@ -356,16 +268,16 @@ def write_pdb(structure, filename):
                     else:
                         col3 = col3 + " "
                 
-                col4 = atom.resname
+                col4 = atom.residue_name
                 for i in range((5 - len(col4))):
                     if i < 1:
                         col4 = " " + col4
                     else:
                         col4 = col4 + " "
                 
-                col5 = atom.chain
+                col5 = atom.chain_name
 
-                col6 = str(atom.resnmbr)
+                col6 = str(atom.residue_name)
                 for i in range((4 - len(col6))):
                     col6 = " " + col6
                 
@@ -391,11 +303,11 @@ def write_pdb(structure, filename):
                 for i in range(6-len(col10)):
                     col10 = " " + col10
                 
-                col11 = atom.tempf
+                col11 = atom.temperature_factor
                 for i in range(6-len(col11)):
                     col11 = " " + col11
                 
-                col12 = atom.segid
+                col12 = atom.segment_id
                 for i in range(4-len(atom.segid)):
                     col12 = " " + col12
 
@@ -773,7 +685,7 @@ def cluster_voxels(voxels):
         
         if len(neighbours) == 0:
             
-            if len(current_pocket) > 10:
+            if len(current_pocket) > 5:
                 pockets.append(current_pocket)
 
             if len(voxels) == 1:
@@ -781,9 +693,10 @@ def cluster_voxels(voxels):
             else:
                 voxels = np.delete(voxels, np.where(voxels == current_pocket))
 
-    if len(current_pocket) > 10:
+    if len(current_pocket) > 5:
         pockets.append(current_pocket)
     
+    pockets = sorted(pockets, key = lambda x : len(x), reverse = True )
     return pockets
 
 
@@ -801,7 +714,7 @@ def find_pockets(structure):
 
     pockets = cluster_voxels(pocket_potential)
 
-    return pockets
+    return pockets[:10]
 
 
 def open_mol2(file, name):
@@ -851,10 +764,12 @@ def compare_pocket_to_ligand(pocket, ligand):
 
 ################################################################3##
     
-# struct = open_local_pdb("data/receptor.pdb")
+parser = Parser("data/receptor.pdb")
+structure = parser.parse()
 
-
+print(structure.atoms[1].structure.name)
 # pockets = find_pockets(struct)
+
 
 # best_pocket = []
 # for pocket in pockets:
@@ -877,6 +792,29 @@ def compare_pocket_to_ligand(pocket, ligand):
 # write_pdb(all_pocket_struct, "pockets.pdb")
 # write_pdb(best_pocket_struct, "best.pdb")
 
-ligand = open_mol2("data/crystal_ligand.mol2", "ligand")
+# ligand = open_mol2("data/crystal_ligand.mol2", "ligand")
 
-write_pdb(ligand, "ligand.pdb")
+# write_pdb(ligand, "ligand.pdb")
+
+#################
+#corona#
+#################
+
+# struct = open_web_pdb("6Y84")
+
+# no_hoh = Structure("no_hoh")
+# for atom in struct.Atoms:
+#     if atom.residue_name != "HOH":
+#         no_hoh.add_atom(atom)
+
+
+# pockets = find_pockets(no_hoh)
+
+# all_pocket_struct = Structure("all")
+# for pocket in pockets:
+#     for voxel in pocket:
+#         dum = make_dummy(voxel.x, voxel.y, voxel.z)
+#         all_pocket_struct.add_atom(dum)
+
+# write_pdb(all_pocket_struct, "pockets.pdb")
+# write_pdb(struct, "6Y84.pdb")
