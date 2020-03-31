@@ -72,26 +72,29 @@ class Voxel:
 
 class Parser:
 
-    def __init__(self, file, local=True):
-        self.file = file
-        self.local = local
+    def parse(self, file, local=True, identifier="ATOM", residue_name="UNK", chain_name=""):
 
-    def parse(self):
+        name = file.split("/")[-1].split(".")[0]
 
-        name = self.file.split("/")[-1].split(".")[0]
-
-        if self.file[-4:] == ".pdb":
-            if self.local:
-                with open(self.file) as pdb:
+        if file[-4:] == ".pdb":
+            if local:
+                with open(file) as pdb:
                     structure = self._read_pdb(pdb, name)
             else:
                 import urllib3
                 
                 http = urllib3.PoolManager()
-                page = http.request('GET', "https://files.rcsb.org/view/{}".format(self.file))
+                page = http.request('GET', "https://files.rcsb.org/view/{}".format(file))
                 f = page.data.decode("utf-8")
                 pdb = f.split("\n")
                 structure = self._read_pdb(pdb, name)
+
+        elif file[-5:] == ".mol2":
+            with open(file) as mol2:
+                structure = self._read_mol2(mol2, name, identifier, residue_name, chain_name)
+
+        else:
+            raise ValueError("File extention not recognized by parser")
 
         return structure
 
@@ -133,6 +136,49 @@ class Parser:
 
                
         return current_structure
+
+    def _read_mol2(self, mol2, name, identifier, residue_name, chain_name):
+        
+        current_structure = Structure(name)
+        self.current_chain = ""
+        self.current_residue = ""
+        self.residue_numbers = {}
+        self.chain_names = []
+
+        reading = False
+        
+        for line in mol2:
+
+            if line.strip() == "@<TRIPOS>ATOM":
+                reading = True
+            elif len(line) > 0:  
+                if line.strip().startswith("@"):
+                    reading = False
+
+            if reading and line.strip() != "@<TRIPOS>ATOM":
+                line = line.split()
+                identifier = identifier
+                number = line[0]     #atomnmbr
+                name = line[1]     #atom
+                residue_name = residue_name   #residue
+                chain_name = chain_name        #chain
+                residue_number = line[6] #resnmbr
+                x = line[2]         #X
+                y = line[3]         #Y      
+                z = line[4]         #z
+                occupancy = ""     #occupancy
+                temperature_factor = ""     #Temperature factor
+                segid = chain_name     #Segment identifer
+                element = line[5].split(".")[0]   #element symbol
+
+                atom = Atom(identifier, name, residue_name, chain_name, residue_number, x, y, z, occupancy,
+                temperature_factor, segid, element)
+
+                self._add_atom(atom, current_structure)
+
+
+        return current_structure
+        
 
 
     def _add_atom(self, atom, structure):
@@ -195,6 +241,13 @@ class Parser:
         addarray = np.array([residue])
         chain.residues = np.concatenate([chain.residues, addarray])
     
+class Builder(Parser):
+
+    def build_dummy(self):
+        pass
+    
+    def build_pocket(self):
+        pass
 
 def make_dummy(x, y, z):
 
@@ -298,7 +351,7 @@ def write_pdb(structure, filename):
                 if len(col9) > 8:
                     col9 = col9[:7]
                 for i in range(8 - len(col9)):
-                    col9 = " " + col9
+                    col9 = " " + col9 
                 
                 col10 = atom.occupancy
                 for i in range(6-len(col10)):
@@ -717,37 +770,6 @@ def find_pockets(structure):
 
     return pockets[:10]
 
-
-def open_mol2(file, name):
-
-    """reads a mol2 file and returns a Structure object"""
-
-    molecule = Structure(name)
-    with open(file) as f:
-        reading = False
-
-        for line in f:
-
-            if line.strip() == "@<TRIPOS>ATOM":
-                reading = True
-            elif len(line) > 0:  
-                if line.strip().startswith("@"):
-                    reading = False
-
-            if reading and line.strip() != "@<TRIPOS>ATOM":
-                line = line.split()
-                atom = Atom(line[1], line[5].split(".")[0])
-                atom.set_pos(line[2], line[3], line[4])
-                atom.set_ident("ATOM")
-                atom.set_residue("LIG", 1)
-                atom.set_chain("")
-                atom.set_occupancy("")
-                atom.set_tempf("")
-                atom.set_segid("")
-                molecule.add_atom(atom)
-    return molecule
-
-
 def compare_pocket_to_ligand(pocket, ligand):
 
     import math
@@ -765,7 +787,7 @@ def compare_pocket_to_ligand(pocket, ligand):
 
 ################################################################3##
     
-# structure = Parser("data/receptor.pdb").parse()
+# structure = Parser().parse("data/crystal_ligand.mol2")
 
 # pockets = find_pockets(struct)
 
